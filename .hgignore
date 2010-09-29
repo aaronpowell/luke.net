@@ -1,0 +1,6 @@
+relre:bin/*
+relre:obj/*
+relre:TestResults/*
+relre:PaulPadForMe/publish/*
+relre:.suo
+relre:.user

@@ -1,0 +1,12 @@
+﻿<Window x:Class="Luke.Net.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Luke.Net - A Lucene.Net Index Toolbox" Height="425" Width="825" WindowStartupLocation="CenterScreen">
+    <DockPanel>
+        <Border>
+            <Grid>
+                <Frame Focusable="False" Name="MainFrame" NavigationUIVisibility="Hidden" />
+            </Grid>
+        </Border>
+    </DockPanel>
+</Window>
