@@ -15,7 +15,7 @@ namespace Luke.Net.Contollers
 
         public ActionResult OpenIndex()
         {
-            return OpenIndex(@"C:\_Projects\bitbucket.org\Private Works\BlogManager\BlogManager\bin\Debug\LuceneIndex");
+            return OpenIndex(@"..\..\..\..\LuceneIndex");
         }
     }
 }
