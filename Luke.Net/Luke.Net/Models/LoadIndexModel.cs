@@ -5,6 +5,7 @@ using Magellan.Framework;
 using Luke.Net.Utilities;
 using Lucene.Net.Search;
 using Lucene.Net.Index;
+using Magellan;
 
 namespace Luke.Net.Models
 {
@@ -187,13 +188,14 @@ namespace Luke.Net.Models
 
         void InspectFieldsExecuted(IEnumerable<FieldInfo> terms)
         {
-            var searcher = new IndexSearcher(ActiveIndex.Directory);
+            var searcher = new IndexSearcher(ActiveIndex.Directory, true);
             
             BooleanQuery q = new BooleanQuery();
             foreach (var term in terms)
             {
                 q.Add(new TermQuery(new Term(term.Field)), BooleanClause.Occur.SHOULD);
             }
+
         }
     }
 

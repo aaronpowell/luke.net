@@ -8,7 +8,7 @@ using Magellan.Framework;
 
 namespace Luke.Net.Contollers
 {
-    public class LuceneIndexController : Controller
+    public class LuceneIndexController : ExtendedController
     {
         public ActionResult LoadIndex(ActiveIndexModel indexInfo)
         {
@@ -68,11 +68,16 @@ namespace Luke.Net.Contollers
                 {
                     x.Rank = i+1;
                     return x;
-                }).Take(50),
+                }),
                 ActiveIndex = indexInfo
             };
 
             return Page(model);
+        }
+
+        public ActionResult TermsForFields(IEnumerable<FieldInfo> fields)
+        {
+            return Object(null);
         }
     }
 }
