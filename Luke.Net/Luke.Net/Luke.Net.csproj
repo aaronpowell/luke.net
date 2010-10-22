@@ -70,6 +70,7 @@
     <Compile Include="ActionResults\ObjectActionResult.cs" />
     <Compile Include="Contollers\LuceneIndexController.cs" />
     <Compile Include="Contollers\PopupController.cs" />
+    <Compile Include="ExtendedController.cs" />
     <Compile Include="Models\ActiveIndexModel.cs" />
     <Compile Include="Models\Binders\ActiveIndexModelBinder.cs" />
     <Compile Include="Models\LoadIndexModel.cs" />
