@@ -73,7 +73,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Features\Popup\ActiveIndexModel.cs" />
-    <Compile Include="Binders\ActiveIndexModelBinder.cs" />
     <Compile Include="Features\LuceneIndex\LoadIndexModel.cs" />
     <Compile Include="Utilities\HighFreqTerms.cs" />
     <Compile Include="Utilities\IndexGate.cs" />
