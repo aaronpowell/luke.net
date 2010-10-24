@@ -4,4 +4,4 @@ relre:TestResults/*
 relre:PaulPadForMe/publish/*
 relre:.suo
 relre:.user
-relre:w+/w+.pdb
+relre:\w+.pdb

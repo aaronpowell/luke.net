@@ -74,16 +74,16 @@
                     <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding IndexDetails.Capabilities}" Style="{StaticResource SmallFont}" />
 
                     <TextBlock Grid.Column="0" Grid.Row="3" Text="TermInfos index divisor:" Style="{StaticResource SmallFont}" />
-                    <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding TermInfosDivisor}" Style="{StaticResource SmallFont}" />
+                    <TextBlock Grid.Column="1" Grid.Row="3" Text="TermInfosDivisor" Style="{StaticResource SmallFont}" />
 
                     <TextBlock Grid.Column="0" Grid.Row="4" Text="Directory Type:" Style="{StaticResource SmallFont}" />
-                    <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Directory}" Style="{StaticResource SmallFont}" />
+                    <TextBlock Grid.Column="1" Grid.Row="4" Text="Directory" Style="{StaticResource SmallFont}" />
 
                     <TextBlock Grid.Column="0" Grid.Row="5" Text="Currently open commit points:" Style="{StaticResource SmallFont}" />
-                    <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding CommitPoint}" Style="{StaticResource SmallFont}" />
+                    <TextBlock Grid.Column="1" Grid.Row="5" Text="CommitPoint" Style="{StaticResource SmallFont}" />
 
                     <TextBlock Grid.Column="0" Grid.Row="6" Text="Current commit user data:" Style="{StaticResource SmallFont}" />
-                    <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding CommitData}" Style="{StaticResource SmallFont}" />
+                    <TextBlock Grid.Column="1" Grid.Row="6" Text="CommitData" Style="{StaticResource SmallFont}" />
                 </Grid>
             </Border>
 
