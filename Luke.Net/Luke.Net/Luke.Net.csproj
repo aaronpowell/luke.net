@@ -41,15 +41,20 @@
     <Reference Include="Lucene.Net">
       <HintPath>..\Solution Items\Reference Assemblies\Lucene.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Magellan">
-      <HintPath>..\Solution Items\Reference Assemblies\Magellan\Magellan.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Prism">
+      <HintPath>..\Solution Items\Reference Assemblies\Prism\Microsoft.Practices.Prism.dll</HintPath>
     </Reference>
-    <Reference Include="Magellan.Behaviors">
-      <HintPath>..\Solution Items\Reference Assemblies\Magellan\Magellan.Behaviors.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Prism.UnityExtensions">
+      <HintPath>..\Solution Items\Reference Assemblies\Prism\Microsoft.Practices.Prism.UnityExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\Solution Items\Reference Assemblies\Prism\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\Solution Items\Reference Assemblies\Prism\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Interactivity" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -67,24 +72,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ActionResults\ObjectActionResult.cs" />
-    <Compile Include="Contollers\LuceneIndexController.cs" />
-    <Compile Include="Contollers\PopupController.cs" />
-    <Compile Include="ExtendedController.cs" />
-    <Compile Include="Models\ActiveIndexModel.cs" />
-    <Compile Include="Models\Binders\ActiveIndexModelBinder.cs" />
-    <Compile Include="Models\LoadIndexModel.cs" />
-    <Compile Include="Contollers\SearchController.cs" />
+    <Compile Include="Features\Popup\ActiveIndexModel.cs" />
+    <Compile Include="Binders\ActiveIndexModelBinder.cs" />
+    <Compile Include="Features\LuceneIndex\LoadIndexModel.cs" />
     <Compile Include="Utilities\HighFreqTerms.cs" />
     <Compile Include="Utilities\IndexGate.cs" />
-    <Compile Include="Models\IndexModel.cs" />
     <Compile Include="ValueConverters\BooleanToWordValueConverter.cs" />
     <Compile Include="ValueConverters\PercentageValueConverter.cs" />
-    <Compile Include="Views\LuceneIndex\LoadIndexPage.xaml.cs">
-      <DependentUpon>LoadIndexPage.xaml</DependentUpon>
+    <Compile Include="Features\LuceneIndex\LoadIndexView.xaml.cs">
+      <DependentUpon>LoadIndexView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Popup\OpenIndexPage.xaml.cs">
-      <DependentUpon>OpenIndexPage.xaml</DependentUpon>
+    <Compile Include="Features\Popup\OpenIndexView.xaml.cs">
+      <DependentUpon>OpenIndexView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -98,11 +97,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\LuceneIndex\LoadIndexPage.xaml">
+    <Page Include="Features\LuceneIndex\LoadIndexView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Popup\OpenIndexPage.xaml">
+    <Page Include="Features\Popup\OpenIndexView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -131,6 +130,7 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

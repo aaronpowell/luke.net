@@ -1,16 +1,15 @@
 ﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using Luke.Net.Models;
 
-namespace Luke.Net.Views.LuceneIndex
+namespace Luke.Net.Features.LuceneIndex
 {
     /// <summary>
-    /// Interaction logic for LoadIndexPage.xaml
+    /// Interaction logic for LoadIndexView.xaml
     /// </summary>
-    public partial class LoadIndexPage : Page
+    public partial class LoadIndexView : UserControl
     {
-        public LoadIndexPage()
+        public LoadIndexView()
         {
             InitializeComponent();
         }
@@ -26,6 +25,18 @@ namespace Luke.Net.Views.LuceneIndex
             var selectedTerms = fieldsListView.SelectedItems.Cast<FieldInfo>();
 
             ((LoadIndexModel)DataContext).InspectFields.Execute(selectedTerms);
+        }
+
+        public LoadIndexModel IndexModel
+        {
+            get
+            {
+                return (LoadIndexModel)DataContext;
+            }
+            set
+            {
+                DataContext = value;
+            }
         }
     }
 }

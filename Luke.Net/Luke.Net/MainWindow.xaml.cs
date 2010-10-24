@@ -1,30 +1,27 @@
-﻿using System;
-using System.Windows;
-using Magellan;
-using Magellan.Events;
-using Magellan.Progress;
+﻿using System.Windows;
+using Luke.Net.Features.LuceneIndex;
+using Luke.Net.Features.Popup;
 
 namespace Luke.Net
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, INavigationProgressListener
+    public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        public INavigator Navigator { get; set; }
-
-        #region INavigationProgressListener Members
-
-        public void UpdateProgress(NavigationEvent navigationEvent)
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var popup = new OpenIndexView();
+            if(popup.ShowDialog() ?? false)
+            {
+                var path = popup.IndexToOpen;
+                indexView.IndexModel = LoadIndexModel.LoadIndex(path);
+            }
         }
-
-        #endregion
     }
 }
