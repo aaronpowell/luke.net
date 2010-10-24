@@ -16,7 +16,7 @@ namespace Luke.Net.Features.LuceneIndex
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var lv = (ListView)sender;
+            var lv = (DataGrid)sender;
             TermMenu.IsEnabled = lv.SelectedItems.Count > 0;
         }
 

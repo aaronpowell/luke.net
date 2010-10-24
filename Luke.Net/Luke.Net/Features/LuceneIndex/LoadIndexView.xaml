@@ -4,7 +4,7 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 	  mc:Ignorable="d" 
-	  d:DesignHeight="300" d:DesignWidth="300">
+	  d:DesignHeight="300" d:DesignWidth="410">
     <StackPanel Margin="10,5">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -95,40 +95,14 @@
                         <MenuItem Header="Inspect" Click="InspectTerms_Click" />
                     </MenuItem>
                 </Menu>
-                <ListView ItemsSource="{Binding Fields}" SelectionChanged="ListView_SelectionChanged" x:Name="fieldsListView">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Field">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Field}" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="Term Count">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Count}" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="%">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Frequency,StringFormat={}{0:F2}%}" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="Decoder">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="Decoder" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                <DataGrid ItemsSource="{Binding Fields}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Field" Binding="{Binding Field}" />
+                        <DataGridTextColumn Header="Term Count" Binding="{Binding Count}" />
+                        <DataGridTextColumn Header="%" Binding="{Binding Frequency, StringFormat={}{0:F2}%}" />
+                        <DataGridTextColumn Header="Decoder" Binding="{Binding Decoder}" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </StackPanel>
 
             <StackPanel>
@@ -138,40 +112,16 @@
                         <MenuItem Header="Inspect Documents" />
                     </MenuItem>
                 </Menu>
-            <ListView ItemsSource="{Binding Terms}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Rank">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Rank}" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Frequency">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Frequency}" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Field">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Field}" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Text">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Term}" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+                <ScrollViewer>
+                    <DataGrid ItemsSource="{Binding Terms}" SelectionChanged="ListView_SelectionChanged" x:Name="fieldsListView">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Rank}" Header="Rank" />
+                            <DataGridTextColumn Binding="{Binding Frequency}" Header="Frequency" />
+                            <DataGridTextColumn Binding="{Binding Field}" Header="Field" />
+                            <DataGridTextColumn Binding="{Binding Term}" Header="Text" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+            </ScrollViewer>
             </StackPanel>
         </StackPanel>
     </StackPanel>
