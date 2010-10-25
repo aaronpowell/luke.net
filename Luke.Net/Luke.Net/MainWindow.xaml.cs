@@ -13,15 +13,5 @@ namespace Luke.Net
         {
             InitializeComponent();
         }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            var popup = new OpenIndexView();
-            if(popup.ShowDialog() ?? false)
-            {
-                var path = popup.IndexToOpen;
-                indexView.DataContext = LoadIndexModel.LoadIndex(path);
-            }
-        }
     }
 }

@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="Features\Popup\ActiveIndexModel.cs" />
     <Compile Include="Features\LuceneIndex\LoadIndexModel.cs" />
+    <Compile Include="Features\Popup\IndexChangedEvent.cs" />
     <Compile Include="Utilities\HighFreqTerms.cs" />
     <Compile Include="Utilities\IndexGate.cs" />
     <Compile Include="ValueConverters\BooleanToWordValueConverter.cs" />
