@@ -1,14 +1,14 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Windows.Input;
 using Lucene.Net.Store;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.ViewModel;
 using Directory = Lucene.Net.Store.Directory;
 
 namespace Luke.Net.Features.Popup
 {
-    public class ActiveIndexModel
+    public class ActiveIndexModel : NotificationObject
     {
         private readonly IEventAggregator _eventAggregator;
 
@@ -35,8 +35,30 @@ namespace Luke.Net.Features.Popup
             _eventAggregator.GetEvent<IndexChangedEvent>().Publish(this);
         }
 
-        public string Path { get; set; }
-        public bool ReadOnly { get; set; }
+        private string _path;
+        public string Path
+        {
+            get { return _path; }
+            set
+            {
+                _path = value;
+                // ToDo: I do not like this. Should find a way to avoid it
+                LoadIndexExecuted.RaiseCanExecuteChanged(); 
+                RaisePropertyChanged(() => Path);
+            }
+        }
+
+        private bool _readOnly;
+        public bool ReadOnly
+        {
+            get { return _readOnly; }
+            set
+            {
+                _readOnly = value;
+                RaisePropertyChanged(() => ReadOnly);
+            }
+        }
+
         public Directory Directory
         {
             get
@@ -48,6 +70,6 @@ namespace Luke.Net.Features.Popup
             }
         }
 
-        public ICommand LoadIndexExecuted { get; private set; }
+        public DelegateCommand LoadIndexExecuted { get; private set; }
     }
 }
