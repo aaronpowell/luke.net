@@ -7,14 +7,21 @@ using Luke.Net.Utilities;
 using Lucene.Net.Search;
 using Lucene.Net.Index;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 
 namespace Luke.Net.Features.LuceneIndex
 {
     public class LoadIndexModel : NotificationObject
     {
-        public LoadIndexModel()
+        // ToDo: this should go ASAP
+        public LoadIndexModel() : this(App.EventAggregator)
         {
+        }
+
+        public LoadIndexModel(IEventAggregator eventAggregator)
+        {
+            eventAggregator.GetEvent<IndexChangedEvent>().Subscribe(LoadIndex);
             InspectFields = new DelegateCommand<IEnumerable<FieldInfo>>(InspectFieldsExecuted);
         }
 
@@ -121,7 +128,7 @@ namespace Luke.Net.Features.LuceneIndex
         {
             get
             {
-                return _fields.Take(10);
+                return _fields;
             }
             set
             {
@@ -177,7 +184,10 @@ namespace Luke.Net.Features.LuceneIndex
         {
             get
             {
-                return _terms.Take(5);
+                if (_terms == null)
+                    return new TermInfo[] { }; // ToDo: just a quick hack. should be fixed
+
+                return _terms.Take(50);
             }
             set
             {
@@ -197,14 +207,13 @@ namespace Luke.Net.Features.LuceneIndex
             {
                 q.Add(new TermQuery(new Term(term.Field)), BooleanClause.Occur.SHOULD);
             }
-
         }
 
-        public static LoadIndexModel LoadIndex(ActiveIndexModel indexInfo)
+        public void LoadIndex(ActiveIndexModel indexInfo)
         {
             //DirectoryInfo dir = new DirectoryInfo(indexInfo.IndexPath);
             var directory = indexInfo.Directory;
-            var indexReader = Lucene.Net.Index.IndexReader.Open(directory, indexInfo.ReadOnly);
+            var indexReader = IndexReader.Open(directory, indexInfo.ReadOnly);
 
             var v = IndexGate.GetIndexFormat(directory);
 
@@ -238,29 +247,26 @@ namespace Luke.Net.Features.LuceneIndex
                 termCount++;
             }
 
-            return new LoadIndexModel
-            {
-                IndexDetails = IndexGate.GetFormatDetails(v),
-                FieldCount = indexReader.GetFieldNames(Lucene.Net.Index.IndexReader.FieldOption.ALL).Count,
-                TermCount = termCount,
-                //LastModified = dir.LastWriteTime, // IndexReader.LastModified(directory),
-                Version = indexReader.GetVersion().ToString("x"),
-                DocumentCount = indexReader.NumDocs(),
-                Fields = fieldCounter.Select(x =>
-                {
-                    x.Frequency = ((double)x.Count * 100) / (double)termCount;
-                    return x;
-                }),
-                HasDeletions = indexReader.HasDeletions(),
-                DeletionCount = indexReader.NumDeletedDocs(),
-                Optimized = indexReader.IsOptimized(),
-                Terms = termCounter.OrderByDescending(x => x.Frequency).Select((x, i) =>
-                {
-                    x.Rank = i + 1;
-                    return x;
-                }),
-                ActiveIndex = indexInfo
-            };
+            IndexDetails = IndexGate.GetFormatDetails(v);
+            FieldCount = indexReader.GetFieldNames(IndexReader.FieldOption.ALL).Count;
+            TermCount = termCount;
+            //LastModified = dir.LastWriteTime, // IndexReader.LastModified(directory);
+            Version = indexReader.GetVersion().ToString("x");
+            DocumentCount = indexReader.NumDocs();
+            Fields = fieldCounter.Select(x =>
+                                             {
+                                                 x.Frequency = ((double) x.Count*100)/termCount;
+                                                 return x;
+                                             });
+            HasDeletions = indexReader.HasDeletions();
+            DeletionCount = indexReader.NumDeletedDocs();
+            Optimized = indexReader.IsOptimized();
+            Terms = termCounter.OrderByDescending(x => x.Frequency).Select((x, i) =>
+                                                                               {
+                                                                                   x.Rank = i + 1;
+                                                                                   return x;
+                                                                               });
+            ActiveIndex = indexInfo;
         }
 
 
