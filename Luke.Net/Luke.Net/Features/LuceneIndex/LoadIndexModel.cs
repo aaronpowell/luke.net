@@ -121,7 +121,7 @@ namespace Luke.Net.Features.LuceneIndex
         {
             get
             {
-                return _fields;
+                return _fields.Take(10);
             }
             set
             {
@@ -177,7 +177,7 @@ namespace Luke.Net.Features.LuceneIndex
         {
             get
             {
-                return _terms;
+                return _terms.Take(5);
             }
             set
             {
