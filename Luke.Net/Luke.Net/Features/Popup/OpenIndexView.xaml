@@ -8,11 +8,13 @@
     <UserControl.DataContext>
         <Popup:ActiveIndexModel />
     </UserControl.DataContext>
-    
-	<StackPanel Margin="10" Orientation="Horizontal" VerticalAlignment="Top">
-        <Label>Index Path</Label>
-        <TextBox Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <RadioButton Margin="20, 0" IsChecked="{Binding Path=ReadOnly}">Readonly</RadioButton>
-        <Button Content="Open Index" HorizontalAlignment="Right" Command="{Binding LoadIndexExecuted}" />
-	</StackPanel>
+
+    <Expander Margin="5" DockPanel.Dock="Top" Header="Load Index" x:Name="loadIndexExpander">
+        <StackPanel Margin="10" Orientation="Horizontal" VerticalAlignment="Top">
+            <Label>Index Path</Label>
+            <TextBox Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <RadioButton Margin="20, 0" IsChecked="{Binding Path=ReadOnly}">Readonly</RadioButton>
+            <Button Content="Open Index" HorizontalAlignment="Right" Click="Button_Click" Command="{Binding LoadIndexExecuted}" />
+        </StackPanel>
+    </Expander>
 </UserControl>

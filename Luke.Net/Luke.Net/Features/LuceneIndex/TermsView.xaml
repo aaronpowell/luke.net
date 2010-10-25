@@ -10,8 +10,8 @@
         <ValueConverters:NotNullValueConverter x:Key="notNullConverter" />
     </UserControl.Resources>
 
-    <StackPanel ClipToBounds="True">
-        <Menu x:Name="TermMenu" IsEnabled="{Binding ElementName=termsView, Path=SelectedItem, Converter={StaticResource notNullConverter}}">
+    <DockPanel  ClipToBounds="False">
+        <Menu DockPanel.Dock="Top" x:Name="TermMenu" IsEnabled="{Binding ElementName=termsView, Path=SelectedItem, Converter={StaticResource notNullConverter}}">
             <MenuItem Header="Term">
                 <MenuItem Header="Search" />
                 <MenuItem Header="Inspect Documents" />
@@ -27,5 +27,5 @@
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>
-    </StackPanel>
+    </DockPanel>
 </UserControl>
