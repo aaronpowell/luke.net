@@ -6,11 +6,7 @@
         <Expander DockPanel.Dock="Top" Header="Load Index">
             <Popup:OpenIndexView />
         </Expander>
-        <!--<Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File">
-                <MenuItem Header="_Open Index" Click="MenuItem_Click" />
-            </MenuItem>
-        </Menu>-->
+
         <Border>
             <LuceneIndex:LoadIndexView x:Name="indexView" />
         </Border>

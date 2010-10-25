@@ -11,8 +11,8 @@
     
 	<StackPanel Margin="10" Orientation="Horizontal" VerticalAlignment="Top">
         <Label>Index Path</Label>
-        <TextBox Text="{Binding Path=Path}"/>
+        <TextBox Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <RadioButton Margin="20, 0" IsChecked="{Binding Path=ReadOnly}">Readonly</RadioButton>
-        <Button Content="Open Index" IsDefault="True" HorizontalAlignment="Right" Command="{Binding LoadIndexExecuted}" />
+        <Button Content="Open Index" HorizontalAlignment="Right" Command="{Binding LoadIndexExecuted}" />
 	</StackPanel>
 </UserControl>
