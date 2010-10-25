@@ -77,6 +77,9 @@
     <Compile Include="Utilities\HighFreqTerms.cs" />
     <Compile Include="Utilities\IndexGate.cs" />
     <Compile Include="ValueConverters\BooleanToWordValueConverter.cs" />
+    <Compile Include="ValueConverters\IsNotEmptyValueConverter.cs" />
+    <Compile Include="ValueConverters\NegateValueConverter.cs" />
+    <Compile Include="ValueConverters\NotNullValueConverter.cs" />
     <Compile Include="ValueConverters\PercentageValueConverter.cs" />
     <Compile Include="Features\LuceneIndex\LoadIndexView.xaml.cs">
       <DependentUpon>LoadIndexView.xaml</DependentUpon>
