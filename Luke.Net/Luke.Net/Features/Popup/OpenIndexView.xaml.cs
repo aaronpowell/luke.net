@@ -12,5 +12,10 @@ namespace Luke.Net.Features.Popup
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            loadIndexExpander.IsExpanded = false;
+        }
     }
 }

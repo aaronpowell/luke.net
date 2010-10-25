@@ -12,10 +12,7 @@
 
     <Border BorderThickness="1" BorderBrush="Blue" Margin="5" Background="White" CornerRadius="5">
         <DockPanel Margin="2">
-            <Expander Margin="5" DockPanel.Dock="Top" Header="Load Index">
-                <Popup:OpenIndexView />
-            </Expander>
-
+            <Popup:OpenIndexView DockPanel.Dock="Top" />
             <LuceneIndex:LoadIndexView x:Name="indexView" />
         </DockPanel>
     </Border>
