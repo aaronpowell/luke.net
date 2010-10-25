@@ -23,6 +23,7 @@ namespace Luke.Net.Features.LuceneIndex
         {
             eventAggregator.GetEvent<IndexChangedEvent>().Subscribe(LoadIndex);
             InspectFields = new DelegateCommand<IEnumerable<FieldInfo>>(InspectFieldsExecuted);
+            FilterTerms = new DelegateCommand<IEnumerable<FieldInfo>>(FilterTermsExecuted);
         }
 
         private ActiveIndexModel _activeIndex;
@@ -133,7 +134,7 @@ namespace Luke.Net.Features.LuceneIndex
             set
             {
                 _fields = value;
-                RaisePropertyChanged(() => Terms);
+                RaisePropertyChanged(() => Fields);
             }
         }
 
@@ -179,6 +180,17 @@ namespace Luke.Net.Features.LuceneIndex
             }
         }
 
+        private int _numberOfTopTerms = 50; // the default number of items to show
+        public int NumberOfTopTerms
+        {
+            get { return _numberOfTopTerms; }
+            set
+            {
+                _numberOfTopTerms = value;
+                RaisePropertyChanged(()=>NumberOfTopTerms);
+            }
+        }
+
         private IEnumerable<TermInfo> _terms;
         public IEnumerable<TermInfo> Terms
         {
@@ -187,7 +199,7 @@ namespace Luke.Net.Features.LuceneIndex
                 if (_terms == null)
                     return new TermInfo[] { }; // ToDo: just a quick hack. should be fixed
 
-                return _terms.Take(50);
+                return _terms.Where(_termFilter).Take(NumberOfTopTerms);
             }
             set
             {
@@ -196,16 +208,34 @@ namespace Luke.Net.Features.LuceneIndex
             }
         }
 
+        public ICommand FilterTerms { get; set; }
+
+        private readonly Func<TermInfo, bool> _defaultTermFilter = t => true;
+        private Func<TermInfo, bool> _termFilter = t => true;
+
+        void FilterTermsExecuted(IEnumerable<FieldInfo> fields)
+        {
+            // ToDo: Termporary solution. Should think of a better way
+            if (fields != null && fields.Any())
+                _termFilter = t => fields.Any(f => f.Field == t.Field);
+            else
+                _termFilter = _defaultTermFilter;
+
+            // notify that terms view has changed. 
+            // ToDo: should find a better way. 
+            RaisePropertyChanged(()=>Terms);
+        }
+
         public ICommand InspectFields { get; set; }
 
-        void InspectFieldsExecuted(IEnumerable<FieldInfo> terms)
+        void InspectFieldsExecuted(IEnumerable<FieldInfo> fields)
         {
             var searcher = new IndexSearcher(ActiveIndex.Directory, true);
             
             var q = new BooleanQuery();
-            foreach (var term in terms)
+            foreach (var field in fields)
             {
-                q.Add(new TermQuery(new Term(term.Field)), BooleanClause.Occur.SHOULD);
+                q.Add(new TermQuery(new Term(field.Field)), BooleanClause.Occur.SHOULD);
             }
         }
 
