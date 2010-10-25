@@ -87,6 +87,7 @@
     <Compile Include="Utilities\HighFreqTerms.cs" />
     <Compile Include="Utilities\IndexGate.cs" />
     <Compile Include="ValueConverters\BooleanToWordValueConverter.cs" />
+    <Compile Include="ValueConverters\FieldRowToFieldConverter.cs" />
     <Compile Include="ValueConverters\IsNotEmptyValueConverter.cs" />
     <Compile Include="ValueConverters\NegateValueConverter.cs" />
     <Compile Include="ValueConverters\NotNullValueConverter.cs" />
