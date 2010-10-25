@@ -72,6 +72,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Features\LuceneIndex\FieldsView.xaml.cs">
+      <DependentUpon>FieldsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\LuceneIndex\IndexInfoView.xaml.cs">
+      <DependentUpon>IndexInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\LuceneIndex\TermsView.xaml.cs">
+      <DependentUpon>TermsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Features\Popup\ActiveIndexModel.cs" />
     <Compile Include="Features\LuceneIndex\LoadIndexModel.cs" />
     <Compile Include="Utilities\HighFreqTerms.cs" />
@@ -87,6 +96,18 @@
     <Compile Include="Features\Popup\OpenIndexView.xaml.cs">
       <DependentUpon>OpenIndexView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Features\LuceneIndex\FieldsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Features\LuceneIndex\IndexInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Features\LuceneIndex\TermsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

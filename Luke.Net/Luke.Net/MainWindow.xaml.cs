@@ -20,7 +20,7 @@ namespace Luke.Net
             if(popup.ShowDialog() ?? false)
             {
                 var path = popup.IndexToOpen;
-                indexView.IndexModel = LoadIndexModel.LoadIndex(path);
+                indexView.DataContext = LoadIndexModel.LoadIndex(path);
             }
         }
     }

@@ -13,24 +13,5 @@ namespace Luke.Net.Features.LuceneIndex
         {
             InitializeComponent();
         }
-
-        private void InspectTerms_Click(object sender, RoutedEventArgs e)
-        {
-            var selectedTerms = fieldsView.SelectedItems.Cast<FieldInfo>();
-
-            IndexModel.InspectFields.Execute(selectedTerms);
-        }
-
-        public LoadIndexModel IndexModel
-        {
-            get
-            {
-                return (LoadIndexModel)DataContext;
-            }
-            set
-            {
-                DataContext = value;
-            }
-        }
     }
 }
