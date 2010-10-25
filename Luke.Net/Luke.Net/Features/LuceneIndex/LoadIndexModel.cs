@@ -261,15 +261,9 @@ namespace Luke.Net.Features.LuceneIndex
             HasDeletions = indexReader.HasDeletions();
             DeletionCount = indexReader.NumDeletedDocs();
             Optimized = indexReader.IsOptimized();
-            Terms = termCounter.OrderByDescending(x => x.Frequency).Select((x, i) =>
-                                                                               {
-                                                                                   x.Rank = i + 1;
-                                                                                   return x;
-                                                                               });
+            Terms = termCounter.OrderByDescending(x => x.Frequency); 
             ActiveIndex = indexInfo;
         }
-
-
     }
 
     public class FieldInfo

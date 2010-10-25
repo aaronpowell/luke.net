@@ -18,7 +18,7 @@
             </MenuItem>
         </Menu>
         <ScrollViewer>
-            <DataGrid ItemsSource="{Binding Terms}" x:Name="termsView">
+            <DataGrid ItemsSource="{Binding Terms}" x:Name="termsView" LoadingRow="TermsViewLoadingRow">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Rank}" Header="Rank" />
                     <DataGridTextColumn Binding="{Binding Frequency}" Header="Frequency" />

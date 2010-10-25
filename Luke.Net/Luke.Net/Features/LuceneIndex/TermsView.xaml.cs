@@ -23,5 +23,12 @@ namespace Luke.Net.Features.LuceneIndex
         {
             InitializeComponent();
         }
+
+        private void TermsViewLoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            var rowData = (TermInfo)e.Row.DataContext;
+            // Row rank should be set on the fly as grid could show any subset of terminfo
+            rowData.Rank = e.Row.GetIndex() + 1;
+        }
     }
 }
