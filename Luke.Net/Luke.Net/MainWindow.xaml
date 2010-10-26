@@ -10,7 +10,7 @@
         </LinearGradientBrush>
     </Window.Background>
 
-    <Border BorderThickness="1" BorderBrush="Blue" Margin="5" Background="White" CornerRadius="5">
+    <Border  Style="{StaticResource StandardBorder}" BorderBrush="Blue" Background="White" >
         <DockPanel Margin="2">
             <Popup:OpenIndexView DockPanel.Dock="Top" />
             <LuceneIndex:LoadIndexView x:Name="indexView" />
