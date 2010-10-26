@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Luke.Net.Features.Popup;
 using Lucene.Net.Search;
 using Lucene.Net.Index;
+using Luke.Net.Infrastructure;
 using Luke.Net.Infrastructure.Utilities;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
@@ -23,8 +24,8 @@ namespace Luke.Net.Features.LuceneIndex
         {
             eventAggregator.GetEvent<IndexChangedEvent>().Subscribe(LoadIndex);
             eventAggregator.GetEvent<SelectedFieldChangedEvent>().Subscribe(FilterTermsExecuted);
-            InspectFields = new DelegateCommand<IEnumerable<FieldInfo>>(InspectFieldsExecuted);
-            FilterTerms = new DelegateCommand<IEnumerable<FieldInfo>>(FilterTermsExecuted);
+            InspectFields = new RelayCommand<IEnumerable<FieldInfo>>(InspectFieldsExecuted);
+            FilterTerms = new RelayCommand<IEnumerable<FieldInfo>>(FilterTermsExecuted);
         }
 
         private ActiveIndexModel _activeIndex;
