@@ -1,7 +1,7 @@
 ﻿using Lucene.Net.Index;
 using Lucene.Net.Store;
 
-namespace Luke.Net.Utilities
+namespace Luke.Net.Infrastructure.Utilities
 {
     static class IndexGate
     {

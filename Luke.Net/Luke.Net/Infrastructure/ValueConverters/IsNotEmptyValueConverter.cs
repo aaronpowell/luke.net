@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Windows.Controls;
 using System.Windows.Data;
-using Luke.Net.Features.LuceneIndex;
 
-namespace Luke.Net.ValueConverters
+namespace Luke.Net.Infrastructure.ValueConverters
 {
-    class FieldGridSelectedRowToFieldsConverter : IValueConverter
+    class IsNotEmptyValueConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var grid = (DataGrid) value;
-            var selectedFields = grid.SelectedItems.Cast<FieldInfo>();
-            return selectedFields;
+            var enumerable = value as IEnumerable<object>;
+            if (enumerable == null)
+                return false;
+
+            return enumerable.Any();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

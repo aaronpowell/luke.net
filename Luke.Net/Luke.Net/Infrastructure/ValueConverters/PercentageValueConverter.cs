@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Data;
 
-namespace Luke.Net.ValueConverters
+namespace Luke.Net.Infrastructure.ValueConverters
 {
     public class PercentageValueConverter : IMultiValueConverter
     {
