@@ -9,39 +9,26 @@
     <UserControl.Resources>
         <ValueConverters1:FieldGridSelectedRowToFieldsConverter x:Key="rowToFieldConverter" />
     </UserControl.Resources>
+
     <UserControl.DataContext>
         <LuceneIndex:LoadIndexModel />
     </UserControl.DataContext>
 
-        <TabControl>
+    <TabControl>
         <TabItem Header="Overview">
-            <StackPanel Margin="10,5">
+            <StackPanel>
                 <LuceneIndex:IndexInfoView />
 
-                <Border Padding="5" CornerRadius="5" BorderBrush="Black" BorderThickness="1" >
-                    <Grid>
+                <Border Style="{StaticResource StandardBorder}">
+                    <Grid Margin="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="1.5*" />
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Orientation="Horizontal">
                             <LuceneIndex:FieldsView Grid.Column="0" Margin="5,0" />
-                        
-                            <StackPanel>
-                                <Button 
-                                    CommandParameter="{Binding ElementName=fieldsView, Path=SelectedItems, Converter={StaticResource rowToFieldConverter}}"
-                                    Command="{Binding FilterTerms}" 
-                                    Click="Button_Click"
-                                    Content="Show Top Terms" />
-                                <Label>Number of top terms</Label>
-                                <TextBox 
-                                    x:Name="VisibleTermCount" 
-                                    PreviewTextInput="VisibleTermCount_PreviewTextInput" 
-                                    Text="{Binding NumberOfTopTerms, UpdateSourceTrigger=LostFocus}"
-                                    VerticalAlignment="Top" />
-                            </StackPanel>
                         </StackPanel>
                         
                         <GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" HorizontalAlignment="Center" ResizeBehavior="PreviousAndNext" />

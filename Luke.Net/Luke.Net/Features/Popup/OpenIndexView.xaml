@@ -8,8 +8,8 @@
     <UserControl.DataContext>
         <Popup:ActiveIndexModel />
     </UserControl.DataContext>
-
-    <Expander Margin="5" DockPanel.Dock="Top" Header="Load Index" x:Name="loadIndexExpander">
+    <Border Style="{StaticResource StandardBorder}">
+        <Expander Margin="5" DockPanel.Dock="Top" Header="Load Index" x:Name="loadIndexExpander">
         <StackPanel Margin="10" Orientation="Horizontal" VerticalAlignment="Top">
             <Label>Index Path</Label>
             <TextBox Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -17,4 +17,5 @@
             <Button Content="Open Index" HorizontalAlignment="Right" Click="Button_Click" Command="{Binding LoadIndexExecuted}" />
         </StackPanel>
     </Expander>
+    </Border>
 </UserControl>
