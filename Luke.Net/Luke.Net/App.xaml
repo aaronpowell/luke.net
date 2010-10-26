@@ -1,13 +1,11 @@
 ﻿<Application x:Class="Luke.Net.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:converters="clr-namespace:Luke.Net.ValueConverters"
-             StartupUri="MainWindow.xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ValueConverters="clr-namespace:Luke.Net.Infrastructure.ValueConverters" StartupUri="MainWindow.xaml"
              >
     <Application.Resources>
-        <converters:PercentageValueConverter x:Key="PercentageConverter" />
+        <ValueConverters:PercentageValueConverter x:Key="PercentageConverter" />
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-        <converters:BooleanToWordValueConverter x:Key="BoolToWord" />
+        <ValueConverters:BooleanToWordValueConverter x:Key="BoolToWord" />
         
         <Style x:Key="SmallFont" TargetType="TextBlock">
             <Setter Property="FontSize" Value="10" />

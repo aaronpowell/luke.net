@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Windows.Data;
 
-namespace Luke.Net.ValueConverters
+namespace Luke.Net.Infrastructure.ValueConverters
 {
     class NotNullValueConverter : IValueConverter
     {

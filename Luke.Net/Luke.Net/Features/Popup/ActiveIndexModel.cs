@@ -5,6 +5,7 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 using Directory = Lucene.Net.Store.Directory;
+using Luke.Net.Infrastructure;
 
 namespace Luke.Net.Features.Popup
 {
@@ -20,7 +21,8 @@ namespace Luke.Net.Features.Popup
 
         public ActiveIndexModel(IEventAggregator eventAggregator)
         {
-            LoadIndexExecuted = new DelegateCommand(OnLoadIndexExecuted, CanLoadIndex);
+            LoadIndexExecuted = new DelegateCommand(OnLoadIndexExecuted, CanLoadIndex)
+                .InvalidateOnPropertyChange(this);
             _eventAggregator = eventAggregator;
         }
 
@@ -42,8 +44,6 @@ namespace Luke.Net.Features.Popup
             set
             {
                 _path = value;
-                // ToDo: I do not like this. Should find a way to avoid it
-                LoadIndexExecuted.RaiseCanExecuteChanged(); 
                 RaisePropertyChanged(() => Path);
             }
         }
@@ -70,6 +70,6 @@ namespace Luke.Net.Features.Popup
             }
         }
 
-        public DelegateCommand LoadIndexExecuted { get; private set; }
+        public ICommand LoadIndexExecuted { get; private set; }
     }
 }

@@ -84,14 +84,7 @@
     <Compile Include="Features\Popup\ActiveIndexModel.cs" />
     <Compile Include="Features\LuceneIndex\LoadIndexModel.cs" />
     <Compile Include="Features\Popup\IndexChangedEvent.cs" />
-    <Compile Include="Utilities\HighFreqTerms.cs" />
-    <Compile Include="Utilities\IndexGate.cs" />
-    <Compile Include="ValueConverters\BooleanToWordValueConverter.cs" />
-    <Compile Include="ValueConverters\FieldRowToFieldConverter.cs" />
-    <Compile Include="ValueConverters\IsNotEmptyValueConverter.cs" />
-    <Compile Include="ValueConverters\NegateValueConverter.cs" />
-    <Compile Include="ValueConverters\NotNullValueConverter.cs" />
-    <Compile Include="ValueConverters\PercentageValueConverter.cs" />
+    <Compile Include="Infrastructure\CommandExtensions.cs" />
     <Compile Include="Features\LuceneIndex\LoadIndexView.xaml.cs">
       <DependentUpon>LoadIndexView.xaml</DependentUpon>
     </Compile>
@@ -118,6 +111,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Infrastructure\Utilities\IndexGate.cs" />
+    <Compile Include="Infrastructure\ValueConverters\BooleanToWordValueConverter.cs" />
+    <Compile Include="Infrastructure\ValueConverters\FieldRowToFieldConverter.cs" />
+    <Compile Include="Infrastructure\ValueConverters\IsNotEmptyValueConverter.cs" />
+    <Compile Include="Infrastructure\ValueConverters\NegateValueConverter.cs" />
+    <Compile Include="Infrastructure\ValueConverters\NotNullValueConverter.cs" />
+    <Compile Include="Infrastructure\ValueConverters\PercentageValueConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
