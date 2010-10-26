@@ -1,13 +1,12 @@
 ﻿using System.IO;
 using System.Windows.Input;
 using Lucene.Net.Store;
-using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
-using Directory = Lucene.Net.Store.Directory;
 using Luke.Net.Infrastructure;
+using Directory = Lucene.Net.Store.Directory;
 
-namespace Luke.Net.Features.Popup
+namespace Luke.Net.Features.OpenIndex
 {
     public class ActiveIndexModel : NotificationObject
     {

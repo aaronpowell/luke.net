@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Luke.Net.Features.Popup
+namespace Luke.Net.Features.OpenIndex
 {
     /// <summary>
     /// Interaction logic for OpenIndexView.xaml
