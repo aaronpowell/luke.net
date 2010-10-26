@@ -21,8 +21,7 @@ namespace Luke.Net.Features.Popup
 
         public ActiveIndexModel(IEventAggregator eventAggregator)
         {
-            LoadIndexExecuted = new DelegateCommand(OnLoadIndexExecuted, CanLoadIndex)
-                .InvalidateOnPropertyChange(this);
+            LoadIndexExecuted = new RelayCommand(OnLoadIndexExecuted, CanLoadIndex);
             _eventAggregator = eventAggregator;
         }
 

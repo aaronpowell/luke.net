@@ -85,7 +85,7 @@
     <Compile Include="Features\Popup\ActiveIndexModel.cs" />
     <Compile Include="Features\LuceneIndex\LoadIndexModel.cs" />
     <Compile Include="Features\Popup\IndexChangedEvent.cs" />
-    <Compile Include="Infrastructure\CommandExtensions.cs" />
+    <Compile Include="Infrastructure\RelayCommand.cs" />
     <Compile Include="Features\LuceneIndex\LoadIndexView.xaml.cs">
       <DependentUpon>LoadIndexView.xaml</DependentUpon>
     </Compile>
