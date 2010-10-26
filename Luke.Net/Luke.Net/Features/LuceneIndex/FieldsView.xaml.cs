@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using Luke.Net.Infrastructure.ValueConverters;
 
 namespace Luke.Net.Features.LuceneIndex
 {
@@ -25,6 +24,12 @@ namespace Luke.Net.Features.LuceneIndex
             {
                 DataContext = value;
             }
+        }
+
+        private void InspectTerms_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedTerms = fieldsView.SelectedItems.Cast<FieldInfo>();
+            IndexModel.InspectFields.Execute(selectedTerms);
         }
 
         private void fieldsView_SelectionChanged(object sender, SelectionChangedEventArgs e)
