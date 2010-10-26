@@ -12,7 +12,11 @@
                     <MenuItem Header="Inspect" Command="{Binding InspectFields}" Click="InspectTerms_Click" />
                 </MenuItem>
             </Menu>
-            <DataGrid ItemsSource="{Binding Fields}" Name="fieldsView">
+            <DataGrid 
+                IsReadOnly="True"
+                ItemsSource="{Binding Fields}" 
+                Name="fieldsView"
+                SelectionChanged="fieldsView_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Field" Binding="{Binding Field}" />
                     <DataGridTextColumn Header="Term Count" Binding="{Binding Count}" />
