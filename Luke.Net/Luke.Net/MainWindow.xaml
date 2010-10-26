@@ -5,12 +5,13 @@
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="DarkGray" Offset="0"/>
-            <GradientStop Color="Black" Offset="0.3"/>
-            <GradientStop Color="Gray" Offset="1.2"/>
+            <GradientStop Color="Black" Offset="0.2"/>
+            <GradientStop Color="Gray" Offset="0.5"/>
+            <GradientStop Color="Black" Offset="1"/>
         </LinearGradientBrush>
     </Window.Background>
 
-    <Border  Style="{StaticResource StandardBorder}" BorderBrush="Blue" Background="White" >
+    <Border Margin="10" Style="{StaticResource StandardBorder}" BorderBrush="Blue" Background="White" >
         <DockPanel Margin="2">
             <Popup:OpenIndexView DockPanel.Dock="Top" />
             <LuceneIndex:LoadIndexView x:Name="indexView" />

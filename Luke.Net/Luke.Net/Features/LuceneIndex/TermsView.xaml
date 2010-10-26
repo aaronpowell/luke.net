@@ -16,7 +16,7 @@
                 <MenuItem Header="Inspect Documents" />
             </MenuItem>
         </Menu>
-        <ScrollViewer>
+        <Grid>
             <DataGrid 
                 IsReadOnly="True"
                 ItemsSource="{Binding Terms}" 
@@ -29,6 +29,6 @@
                     <DataGridTextColumn Binding="{Binding Term}" Header="Text" />
                 </DataGrid.Columns>
             </DataGrid>
-        </ScrollViewer>
+        </Grid>
     </DockPanel>
 </UserControl>
