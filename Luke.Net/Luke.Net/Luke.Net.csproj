@@ -78,6 +78,7 @@
     <Compile Include="Features\LuceneIndex\IndexInfoView.xaml.cs">
       <DependentUpon>IndexInfoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Features\LuceneIndex\SelectedFieldChangedEvent.xaml.cs" />
     <Compile Include="Features\LuceneIndex\TermsView.xaml.cs">
       <DependentUpon>TermsView.xaml</DependentUpon>
     </Compile>
