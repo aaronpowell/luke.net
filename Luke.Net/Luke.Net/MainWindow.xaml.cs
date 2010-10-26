@@ -1,6 +1,4 @@
 ﻿using System.Windows;
-using Luke.Net.Features.LuceneIndex;
-using Luke.Net.Features.Popup;
 
 namespace Luke.Net
 {

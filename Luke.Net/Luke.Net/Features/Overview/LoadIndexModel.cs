@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using Luke.Net.Features.Popup;
+using Luke.Net.Features.OpenIndex;
 using Lucene.Net.Search;
 using Lucene.Net.Index;
 using Luke.Net.Infrastructure;
 using Luke.Net.Infrastructure.Utilities;
-using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 
-namespace Luke.Net.Features.LuceneIndex
+namespace Luke.Net.Features.Overview
 {
     public class LoadIndexModel : NotificationObject
     {

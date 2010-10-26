@@ -72,35 +72,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Features\LuceneIndex\FieldsView.xaml.cs">
+    <Compile Include="Features\Overview\FieldsView.xaml.cs">
       <DependentUpon>FieldsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Features\LuceneIndex\IndexInfoView.xaml.cs">
+    <Compile Include="Features\Overview\FieldsViewModel.cs" />
+    <Compile Include="Features\Overview\IndexInfoView.xaml.cs">
       <DependentUpon>IndexInfoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Features\LuceneIndex\SelectedFieldChangedEvent.xaml.cs" />
-    <Compile Include="Features\LuceneIndex\TermsView.xaml.cs">
+    <Compile Include="Features\Overview\SelectedFieldChangedEvent.xaml.cs" />
+    <Compile Include="Features\Overview\TermsView.xaml.cs">
       <DependentUpon>TermsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Features\Popup\ActiveIndexModel.cs" />
-    <Compile Include="Features\LuceneIndex\LoadIndexModel.cs" />
-    <Compile Include="Features\Popup\IndexChangedEvent.cs" />
+    <Compile Include="Features\OpenIndex\ActiveIndexModel.cs" />
+    <Compile Include="Features\Overview\LoadIndexModel.cs" />
+    <Compile Include="Features\OpenIndex\IndexChangedEvent.cs" />
     <Compile Include="Infrastructure\RelayCommand.cs" />
-    <Compile Include="Features\LuceneIndex\LoadIndexView.xaml.cs">
+    <Compile Include="Features\Overview\LoadIndexView.xaml.cs">
       <DependentUpon>LoadIndexView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Features\Popup\OpenIndexView.xaml.cs">
+    <Compile Include="Features\OpenIndex\OpenIndexView.xaml.cs">
       <DependentUpon>OpenIndexView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Features\LuceneIndex\FieldsView.xaml">
+    <Page Include="Features\Overview\FieldsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Features\LuceneIndex\IndexInfoView.xaml">
+    <Page Include="Features\Overview\IndexInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Features\LuceneIndex\TermsView.xaml">
+    <Page Include="Features\Overview\TermsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,11 +124,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Features\LuceneIndex\LoadIndexView.xaml">
+    <Page Include="Features\Overview\LoadIndexView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Features\Popup\OpenIndexView.xaml">
+    <Page Include="Features\OpenIndex\OpenIndexView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Data;
-using Luke.Net.Features.LuceneIndex;
+using Luke.Net.Features.Overview;
 
 namespace Luke.Net.Infrastructure.ValueConverters
 {

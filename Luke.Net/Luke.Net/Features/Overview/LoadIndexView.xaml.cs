@@ -1,9 +1,9 @@
-﻿ using System;
- using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Luke.Net.Features.LuceneIndex
+namespace Luke.Net.Features.Overview
 {
     /// <summary>
     /// Interaction logic for LoadIndexView.xaml
