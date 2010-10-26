@@ -22,6 +22,7 @@ namespace Luke.Net.Features.LuceneIndex
         public LoadIndexModel(IEventAggregator eventAggregator)
         {
             eventAggregator.GetEvent<IndexChangedEvent>().Subscribe(LoadIndex);
+            eventAggregator.GetEvent<SelectedFieldChangedEvent>().Subscribe(FilterTermsExecuted);
             InspectFields = new DelegateCommand<IEnumerable<FieldInfo>>(InspectFieldsExecuted);
             FilterTerms = new DelegateCommand<IEnumerable<FieldInfo>>(FilterTermsExecuted);
         }
