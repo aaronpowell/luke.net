@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Practices.Prism.Events;
 
 namespace Luke.Net.Features.Overview
 {
@@ -9,8 +10,11 @@ namespace Luke.Net.Features.Overview
     /// </summary>
     public partial class FieldsView : UserControl
     {
-        public FieldsView()
+        private readonly IEventAggregator _eventAggregator;
+
+        public FieldsView(IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
             InitializeComponent();
         }
 
@@ -34,8 +38,9 @@ namespace Luke.Net.Features.Overview
 
         private void fieldsView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // ToDo: This whole thing should be moved into the view model
             var selectedFields = fieldsView.SelectedItems.Cast<FieldInfo>();
-            App.EventAggregator.GetEvent<SelectedFieldChangedEvent>().Publish(selectedFields);
+            _eventAggregator.GetEvent<SelectedFieldChangedEvent>().Publish(selectedFields);
         }
     }
 }

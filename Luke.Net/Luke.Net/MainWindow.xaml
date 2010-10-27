@@ -1,6 +1,11 @@
 ﻿<Window x:Class="Luke.Net.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Popup="clr-namespace:Luke.Net.Features.OpenIndex" xmlns:Overview="clr-namespace:Luke.Net.Features.Overview" Title="Luke.Net - A Lucene.Net Index Toolbox" Height="425" Width="825" WindowStartupLocation="CenterScreen">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        Title="Luke.Net - A Lucene.Net Index Toolbox" 
+        xmlns:prism="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism" 
+        xmlns:Net="clr-namespace:Luke.Net" Height="425" 
+        Width="825" 
+        WindowStartupLocation="CenterScreen">
 
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -13,8 +18,21 @@
 
     <Border Margin="10" Style="{StaticResource StandardBorder}" BorderBrush="Blue" Background="White" >
         <DockPanel Margin="2">
-            <Popup:OpenIndexView DockPanel.Dock="Top" />
-            <Overview:LoadIndexView x:Name="indexView" />
+            <ContentControl x:Name="OpenIndexRegion" prism:RegionManager.RegionName="{x:Static Net:Regions.OpenIndex}" DockPanel.Dock="Top" />
+
+            <TabControl>
+                <TabItem Header="Overview">
+                    <ContentControl x:Name="OverviewRegion" prism:RegionManager.RegionName="{x:Static Net:Regions.Overview}" />
+                </TabItem>
+                <TabItem Header="Documents">
+                </TabItem>
+                <TabItem Header="Search">
+                </TabItem>
+                <TabItem Header="Files">
+                </TabItem>
+                <TabItem Header="Plugins">
+                </TabItem>
+            </TabControl>
         </DockPanel>
     </Border>
 </Window>

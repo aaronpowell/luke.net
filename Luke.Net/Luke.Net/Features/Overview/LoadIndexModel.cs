@@ -14,11 +14,6 @@ namespace Luke.Net.Features.Overview
 {
     public class LoadIndexModel : NotificationObject
     {
-        // ToDo: this should go ASAP
-        public LoadIndexModel() : this(App.EventAggregator)
-        {
-        }
-
         public LoadIndexModel(IEventAggregator eventAggregator)
         {
             eventAggregator.GetEvent<IndexChangedEvent>().Subscribe(LoadIndex);

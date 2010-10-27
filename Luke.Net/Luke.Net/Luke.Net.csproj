@@ -72,6 +72,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Features\OpenIndex\OpenIndexModule.cs" />
     <Compile Include="Features\Overview\FieldsView.xaml.cs">
       <DependentUpon>FieldsView.xaml</DependentUpon>
     </Compile>
@@ -79,6 +81,7 @@
     <Compile Include="Features\Overview\IndexInfoView.xaml.cs">
       <DependentUpon>IndexInfoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Features\Overview\OverviewModule.cs" />
     <Compile Include="Features\Overview\SelectedFieldChangedEvent.xaml.cs" />
     <Compile Include="Features\Overview\TermsView.xaml.cs">
       <DependentUpon>TermsView.xaml</DependentUpon>
@@ -93,6 +96,7 @@
     <Compile Include="Features\OpenIndex\OpenIndexView.xaml.cs">
       <DependentUpon>OpenIndexView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Regions.cs" />
     <Page Include="Features\Overview\FieldsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
