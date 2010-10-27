@@ -8,8 +8,9 @@ namespace Luke.Net.Features.OpenIndex
     /// </summary>
     public partial class OpenIndexView : UserControl
     {
-        public OpenIndexView()
+        public OpenIndexView(ActiveIndexModel model)
         {
+            DataContext = model;
             InitializeComponent();
         }
 

@@ -2,11 +2,9 @@
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:OpenIndex="clr-namespace:Luke.Net.Features.OpenIndex" mc:Ignorable="d" d:DesignWidth="394">
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" d:DesignWidth="394">
     
-    <UserControl.DataContext>
-        <OpenIndex:ActiveIndexModel />
-    </UserControl.DataContext>
     <Border Style="{StaticResource StandardBorder}">
         <Expander Margin="5" DockPanel.Dock="Top" Header="Load Index" x:Name="loadIndexExpander">
         <StackPanel Margin="10" Orientation="Horizontal" VerticalAlignment="Top">

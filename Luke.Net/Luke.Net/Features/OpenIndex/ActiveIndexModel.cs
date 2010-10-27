@@ -12,15 +12,12 @@ namespace Luke.Net.Features.OpenIndex
     {
         private readonly IEventAggregator _eventAggregator;
 
-        // ToDo: this should go ASAP
-        public ActiveIndexModel() : this(App.EventAggregator)
-        {
-            Path = @"..\..\..\..\LuceneIndex";
-        }
-
         public ActiveIndexModel(IEventAggregator eventAggregator)
         {
             LoadIndexExecuted = new RelayCommand(OnLoadIndexExecuted, CanLoadIndex);
+
+            // ToDo: to read the last open direct from user storage
+            Path = @"..\..\..\..\LuceneIndex";
             _eventAggregator = eventAggregator;
         }
 
