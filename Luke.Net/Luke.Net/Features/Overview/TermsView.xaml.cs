@@ -18,5 +18,10 @@ namespace Luke.Net.Features.Overview
             // Row rank should be set on the fly as grid could show any subset of terminfo
             rowData.Rank = e.Row.GetIndex() + 1;
         }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            TopTermSlider.GetBindingExpression(Slider.ValueProperty).UpdateSource();
+        }
     }
 }

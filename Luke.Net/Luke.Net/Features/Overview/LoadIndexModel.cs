@@ -184,6 +184,7 @@ namespace Luke.Net.Features.Overview
             {
                 _numberOfTopTerms = value;
                 RaisePropertyChanged(()=>NumberOfTopTerms);
+                RaisePropertyChanged(()=>Terms);
             }
         }
 
