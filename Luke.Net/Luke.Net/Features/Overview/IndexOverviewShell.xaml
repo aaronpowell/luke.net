@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Luke.Net.Features.Overview.LoadIndexView"
+﻿<UserControl x:Class="Luke.Net.Features.Overview.IndexOverviewShell"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
