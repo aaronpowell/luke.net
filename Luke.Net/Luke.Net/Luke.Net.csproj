@@ -86,7 +86,7 @@
     <Compile Include="Features\Overview\TermsView.xaml.cs">
       <DependentUpon>TermsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Features\OpenIndex\ActiveIndexModel.cs" />
+    <Compile Include="Features\OpenIndex\OpenIndexModel.cs" />
     <Compile Include="Features\Overview\LoadIndexModel.cs" />
     <Compile Include="Features\OpenIndex\IndexChangedEvent.cs" />
     <Compile Include="Infrastructure\RelayCommand.cs" />

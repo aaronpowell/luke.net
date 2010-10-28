@@ -29,7 +29,7 @@
 //            indexer.Commit();
 //            indexer.Close();
 
-//            var model = new ActiveIndexModel
+//            var model = new OpenIndexModel
 //            {
 //                Directory = dir
 //            };

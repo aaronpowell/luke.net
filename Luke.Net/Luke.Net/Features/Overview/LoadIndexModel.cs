@@ -22,17 +22,17 @@ namespace Luke.Net.Features.Overview
             FilterTerms = new RelayCommand<IEnumerable<FieldInfo>>(FilterTermsExecuted);
         }
 
-        private ActiveIndexModel _activeIndex;
-        public ActiveIndexModel ActiveIndex
+        private OpenIndexModel _openIndex;
+        public OpenIndexModel OpenIndex
         {
             get
             {
-                return _activeIndex;
+                return _openIndex;
             }
             set
             {
-                _activeIndex = value;
-                RaisePropertyChanged(() => ActiveIndex);
+                _openIndex = value;
+                RaisePropertyChanged(() => OpenIndex);
             }
         }
 
@@ -227,7 +227,7 @@ namespace Luke.Net.Features.Overview
 
         void InspectFieldsExecuted(IEnumerable<FieldInfo> fields)
         {
-            var searcher = new IndexSearcher(ActiveIndex.Directory, true);
+            var searcher = new IndexSearcher(OpenIndex.Directory, true);
             
             var q = new BooleanQuery();
             foreach (var field in fields)
@@ -236,7 +236,7 @@ namespace Luke.Net.Features.Overview
             }
         }
 
-        public void LoadIndex(ActiveIndexModel indexInfo)
+        public void LoadIndex(OpenIndexModel indexInfo)
         {
             //DirectoryInfo dir = new DirectoryInfo(indexInfo.IndexPath);
             var directory = indexInfo.Directory;
@@ -289,7 +289,7 @@ namespace Luke.Net.Features.Overview
             DeletionCount = indexReader.NumDeletedDocs();
             Optimized = indexReader.IsOptimized();
             Terms = termCounter.OrderByDescending(x => x.Frequency); 
-            ActiveIndex = indexInfo;
+            OpenIndex = indexInfo;
         }
     }
 

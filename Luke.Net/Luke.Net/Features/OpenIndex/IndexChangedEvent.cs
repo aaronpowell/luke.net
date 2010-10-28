@@ -2,7 +2,7 @@
 
 namespace Luke.Net.Features.OpenIndex
 {
-    class IndexChangedEvent : CompositePresentationEvent<ActiveIndexModel>
+    class IndexChangedEvent : CompositePresentationEvent<OpenIndexModel>
     {
     }
 }

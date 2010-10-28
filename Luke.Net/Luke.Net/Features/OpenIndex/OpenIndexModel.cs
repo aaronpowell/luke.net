@@ -8,11 +8,11 @@ using Directory = Lucene.Net.Store.Directory;
 
 namespace Luke.Net.Features.OpenIndex
 {
-    public class ActiveIndexModel : NotificationObject
+    public class OpenIndexModel : NotificationObject
     {
         private readonly IEventAggregator _eventAggregator;
 
-        public ActiveIndexModel(IEventAggregator eventAggregator)
+        public OpenIndexModel(IEventAggregator eventAggregator)
         {
             LoadIndexExecuted = new RelayCommand(OnLoadIndexExecuted, CanLoadIndex);
 
