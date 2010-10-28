@@ -19,7 +19,7 @@ namespace Luke.Net.Features.Overview
         {
             _regionManager.RegisterViewWithRegion(
                 Regions.Overview, 
-                () => _unityContainer.Resolve<LoadIndexView>());
+                () => _unityContainer.Resolve<IndexOverviewShell>());
             _regionManager.RegisterViewWithRegion(
                 Regions.OverviewFields,
                 () => _unityContainer.Resolve<FieldsView>());

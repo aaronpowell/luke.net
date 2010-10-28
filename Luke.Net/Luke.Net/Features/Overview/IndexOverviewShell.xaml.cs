@@ -3,11 +3,11 @@
 namespace Luke.Net.Features.Overview
 {
     /// <summary>
-    /// Interaction logic for LoadIndexView.xaml
+    /// Interaction logic for IndexOverviewShell.xaml
     /// </summary>
-    public partial class LoadIndexView : UserControl
+    public partial class IndexOverviewShell : UserControl
     {
-        public LoadIndexView(LoadIndexModel model)
+        public IndexOverviewShell(LoadIndexModel model)
         {
             DataContext = model;
             InitializeComponent();
