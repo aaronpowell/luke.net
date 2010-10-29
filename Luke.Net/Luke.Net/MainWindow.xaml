@@ -20,19 +20,7 @@
         <DockPanel Margin="2">
             <ContentControl x:Name="OpenIndexRegion" prism:RegionManager.RegionName="{x:Static Net:Regions.OpenIndex}" DockPanel.Dock="Top" />
 
-            <TabControl>
-                <TabItem Header="Overview">
-                    <ContentControl x:Name="OverviewRegion" prism:RegionManager.RegionName="{x:Static Net:Regions.Overview}" />
-                </TabItem>
-                <TabItem Header="Documents">
-                </TabItem>
-                <TabItem Header="Search">
-                </TabItem>
-                <TabItem Header="Files">
-                </TabItem>
-                <TabItem Header="Plugins">
-                </TabItem>
-            </TabControl>
+            <ContentControl x:Name="IndexRegion" prism:RegionManager.RegionName="{x:Static Net:Regions.IndexRegion}" DockPanel.Dock="Top" />
         </DockPanel>
     </Border>
 </Window>

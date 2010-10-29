@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Windows.Input;
 using Lucene.Net.Store;
+using Luke.Net.Models.Events;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 using Luke.Net.Infrastructure;

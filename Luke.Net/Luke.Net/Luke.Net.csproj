@@ -73,22 +73,28 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Features\LuceneShell.xaml.cs">
+      <DependentUpon>LuceneShell.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Features\OpenIndex\OpenIndexModule.cs" />
     <Compile Include="Features\Overview\FieldsView.xaml.cs">
       <DependentUpon>FieldsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Features\Overview\FieldsViewModel.cs" />
+    <Compile Include="Features\IndexController.cs" />
     <Compile Include="Features\Overview\IndexInfoView.xaml.cs">
       <DependentUpon>IndexInfoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Features\LukeModule.cs" />
     <Compile Include="Features\Overview\OverviewModule.cs" />
-    <Compile Include="Features\Overview\SelectedFieldChangedEvent.xaml.cs" />
+    <Compile Include="Models\Events\IndexLoadedEvent.cs" />
+    <Compile Include="Models\Events\SelectedFieldChangedEvent.xaml.cs" />
     <Compile Include="Features\Overview\TermsView.xaml.cs">
       <DependentUpon>TermsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Features\OpenIndex\OpenIndexModel.cs" />
-    <Compile Include="Features\Overview\LoadIndexModel.cs" />
-    <Compile Include="Features\OpenIndex\IndexChangedEvent.cs" />
+    <Compile Include="Models\Events\IndexChangedEvent.cs" />
+    <Compile Include="Features\Overview\TermsViewModel.cs" />
     <Compile Include="Infrastructure\RelayCommand.cs" />
     <Compile Include="Features\Overview\IndexOverviewShell.xaml.cs">
       <DependentUpon>IndexOverviewShell.xaml</DependentUpon>
@@ -96,7 +102,14 @@
     <Compile Include="Features\OpenIndex\OpenIndexView.xaml.cs">
       <DependentUpon>OpenIndexView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\FieldInfo.cs" />
+    <Compile Include="Models\LuceneIndex.cs" />
+    <Compile Include="Models\TermInfo.cs" />
     <Compile Include="Regions.cs" />
+    <Page Include="Features\LuceneShell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Features\Overview\FieldsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -2,6 +2,7 @@
 {
     class Regions
     {
+        public const string IndexRegion = "LuceneIndexRegion";
         public const string OpenIndex = "OpenIndexViewRegion";
         public const string Overview = "OverviewViewRegion";
         public const string OverviewFields = "OverviewFieldsRegion";

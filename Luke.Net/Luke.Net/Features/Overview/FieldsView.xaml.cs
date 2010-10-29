@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Luke.Net.Models;
+using Luke.Net.Models.Events;
 using Microsoft.Practices.Prism.Events;
 
 namespace Luke.Net.Features.Overview
@@ -12,28 +14,11 @@ namespace Luke.Net.Features.Overview
     {
         private readonly IEventAggregator _eventAggregator;
 
-        public FieldsView(IEventAggregator eventAggregator)
+        public FieldsView(IEventAggregator eventAggregator, FieldsViewModel viewModel)
         {
+            DataContext = viewModel;
             _eventAggregator = eventAggregator;
             InitializeComponent();
-        }
-
-        public LoadIndexModel IndexModel
-        {
-            get
-            {
-                return (LoadIndexModel)DataContext;
-            }
-            set
-            {
-                DataContext = value;
-            }
-        }
-
-        private void InspectTerms_Click(object sender, RoutedEventArgs e)
-        {
-            var selectedTerms = fieldsView.SelectedItems.Cast<FieldInfo>();
-            IndexModel.InspectFields.Execute(selectedTerms);
         }
 
         private void fieldsView_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -9,7 +9,7 @@
         <StackPanel Margin="0 0 20 0">
             <Menu x:Name="FieldMenu" IsEnabled="False">
                 <MenuItem Header="Field">
-                    <MenuItem Header="Inspect" Command="{Binding InspectFields}" Click="InspectTerms_Click" />
+                    <MenuItem Header="Inspect" Command="{Binding InspectFields}" />
                 </MenuItem>
             </Menu>
             <DataGrid 

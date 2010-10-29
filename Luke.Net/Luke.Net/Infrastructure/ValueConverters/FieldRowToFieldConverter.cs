@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Data;
-using Luke.Net.Features.Overview;
+using Luke.Net.Models;
 
 namespace Luke.Net.Infrastructure.ValueConverters
 {
