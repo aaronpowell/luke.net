@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using Luke.Net.Models;
 
 namespace Luke.Net.Features.Overview
 {

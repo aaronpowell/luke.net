@@ -1,7 +1,10 @@
-﻿using System.Windows;
+﻿using System.Reflection;
+using System.Windows;
+using Luke.Net.Features;
 using Luke.Net.Features.OpenIndex;
 using Luke.Net.Features.Overview;
 using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
 
@@ -25,8 +28,11 @@ namespace Luke.Net
             var aggregator = new EventAggregator();
             Container.RegisterInstance<IEventAggregator>(aggregator);
 
+            Container.RegisterInstance<IIndexController>(Container.Resolve<IndexController>());
+
             Container.Resolve<OpenIndexModule>().Initialize();
             Container.Resolve<OverviewModule>().Initialize();
+            Container.Resolve<LukeModule>().Initialize();
         }
     }
 }

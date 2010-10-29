@@ -7,9 +7,8 @@ namespace Luke.Net.Features.Overview
     /// </summary>
     public partial class IndexOverviewShell : UserControl
     {
-        public IndexOverviewShell(LoadIndexModel model)
+        public IndexOverviewShell()
         {
-            DataContext = model;
             InitializeComponent();
         }
     }
