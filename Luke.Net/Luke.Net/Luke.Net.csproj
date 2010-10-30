@@ -86,6 +86,7 @@
       <DependentUpon>IndexInfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Features\LukeModule.cs" />
+    <Compile Include="Features\Overview\IndexInfoViewModel.cs" />
     <Compile Include="Features\Overview\OverviewModule.cs" />
     <Compile Include="Models\Events\IndexLoadedEvent.cs" />
     <Compile Include="Models\Events\SelectedFieldChangedEvent.xaml.cs" />

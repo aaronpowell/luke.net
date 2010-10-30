@@ -22,7 +22,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Column="0" Grid.Row="0" Text="Index Path:" />
-            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding ActiveIndex.Path}" Style="{StaticResource Emphasise}" />
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding IndexPath}" Style="{StaticResource Emphasise}" />
 
             <TextBlock Grid.Column="0" Grid.Row="1" Text="Number of Fields:" />
             <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding FieldCount}" Style="{StaticResource Emphasise}" />

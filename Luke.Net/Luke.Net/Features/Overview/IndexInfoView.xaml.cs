@@ -7,8 +7,9 @@ namespace Luke.Net.Features.Overview
     /// </summary>
     public partial class IndexInfoView : UserControl
     {
-        public IndexInfoView()
+        public IndexInfoView(IndexInfoViewModel model)
         {
+            DataContext = model;
             InitializeComponent();
         }
     }

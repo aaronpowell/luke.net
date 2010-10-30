@@ -7,5 +7,6 @@
         public const string Overview = "OverviewViewRegion";
         public const string OverviewFields = "OverviewFieldsRegion";
         public const string OverviewTerms = "OverviewFieldsTerms";
+        public const string IndexInfo = "IndexInfoRegion";
     }
 }
