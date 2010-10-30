@@ -8,8 +8,9 @@ namespace Luke.Net.Features.Overview
     /// </summary>
     public partial class TermsView : UserControl
     {
-        public TermsView()
+        public TermsView(TermsViewModel model)
         {
+            DataContext = model;
             InitializeComponent();
         }
 
