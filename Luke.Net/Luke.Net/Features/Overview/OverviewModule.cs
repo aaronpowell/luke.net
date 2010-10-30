@@ -26,6 +26,9 @@ namespace Luke.Net.Features.Overview
             _regionManager.RegisterViewWithRegion(
                 Regions.OverviewTerms,
                 () => _unityContainer.Resolve<TermsView>());
+            _regionManager.RegisterViewWithRegion(
+                Regions.IndexInfo,
+                () => _unityContainer.Resolve<IndexInfoView>());
         }
     }
 }
