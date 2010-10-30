@@ -26,6 +26,7 @@ namespace Luke.Net.Features.Overview
             _terms.Clear();
             _terms.AddRange(index.Terms);
             RaisePropertyChanged(() => Terms);
+            RaisePropertyChanged(() => TermCount);
         }
 
         public ICommand FilterTerms { get; set; }
@@ -41,6 +42,7 @@ namespace Luke.Net.Features.Overview
             // notify that terms view has changed. 
             // ToDo: should find a better way. 
             RaisePropertyChanged(() => Terms);
+            RaisePropertyChanged(() => TermCount);
         }
 
         private int _numberOfTopTerms = 50; // the default number of items to show
@@ -52,6 +54,7 @@ namespace Luke.Net.Features.Overview
                 _numberOfTopTerms = value;
                 RaisePropertyChanged(() => NumberOfTopTerms);
                 RaisePropertyChanged(() => Terms);
+                RaisePropertyChanged(() => TermCount);
             }
         }
 
@@ -67,6 +70,14 @@ namespace Luke.Net.Features.Overview
 
                 return _terms.Where(_termFilter).Take(NumberOfTopTerms);
             }
+        }
+
+        public int TermCount
+        {
+         get
+         {
+             return _terms.Count();
+         }
         }
     }
 }
