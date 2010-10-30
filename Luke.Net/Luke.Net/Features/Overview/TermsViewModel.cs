@@ -10,21 +10,25 @@ using Microsoft.Practices.Prism.ViewModel;
 
 namespace Luke.Net.Features.Overview
 {
-    class TermsViewModel : NotificationObject
+    public class TermsViewModel : NotificationObject
     {
-        private readonly LuceneIndex _model;
+        private readonly List<TermInfo> _terms = new List<TermInfo>();
 
-        public TermsViewModel(IEventAggregator eventAggregator, LuceneIndex model)
+        public TermsViewModel(IEventAggregator eventAggregator)
         {
-            _model = model;
             eventAggregator.GetEvent<SelectedFieldChangedEvent>().Subscribe(FilterTermsExecuted);
+            eventAggregator.GetEvent<IndexLoadedEvent>().Subscribe(IndexChanged);
             FilterTerms = new RelayCommand<IEnumerable<FieldInfo>>(FilterTermsExecuted);
         }
 
-        public ICommand FilterTerms { get; set; }
+        private void IndexChanged(LuceneIndex index)
+        {
+            _terms.Clear();
+            _terms.AddRange(index.Terms);
+            RaisePropertyChanged(() => Terms);
+        }
 
-        private readonly Func<TermInfo, bool> _defaultTermFilter = t => true;
-        private Func<TermInfo, bool> _termFilter = t => true;
+        public ICommand FilterTerms { get; set; }
 
         void FilterTermsExecuted(IEnumerable<FieldInfo> fields)
         {
@@ -51,18 +55,18 @@ namespace Luke.Net.Features.Overview
             }
         }
 
+        private readonly Func<TermInfo, bool> _defaultTermFilter = t => true;
+        private Func<TermInfo, bool> _termFilter = t => true;
+
         public IEnumerable<TermInfo> Terms
         {
             get
             {
-                var terms = _model.Terms;
-
-                if (terms == null)
+                if (_terms == null)
                     return new TermInfo[] { }; // ToDo: just a quick hack. should be fixed
 
-                return terms.Where(_termFilter).Take(NumberOfTopTerms);
+                return _terms.Where(_termFilter).Take(NumberOfTopTerms);
             }
         }
-
     }
 }
