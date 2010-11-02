@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Windows;
 using Luke.Net.Features;
+using Luke.Net.Features.Documents;
 using Luke.Net.Features.OpenIndex;
 using Luke.Net.Features.Overview;
 using Microsoft.Practices.Prism.Events;
@@ -31,8 +32,10 @@ namespace Luke.Net
             Container.RegisterInstance<IIndexController>(Container.Resolve<IndexController>());
 
             Container.Resolve<OpenIndexModule>().Initialize();
-            Container.Resolve<OverviewModule>().Initialize();
             Container.Resolve<LukeModule>().Initialize();
+
+            Container.Resolve<OverviewModule>().Initialize();
+            Container.Resolve<DocumentsModule>().Initialize();
         }
     }
 }

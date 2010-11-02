@@ -10,6 +10,7 @@
                 <ContentControl x:Name="OverviewRegion" prism:RegionManager.RegionName="{x:Static Net:Regions.Overview}" />
             </TabItem>
             <TabItem Header="Documents">
+                <ContentControl x:Name="DocumentsRegion" prism:RegionManager.RegionName="{x:Static Net:Regions.DocumentRegion}" />
             </TabItem>
             <TabItem Header="Search">
             </TabItem>
