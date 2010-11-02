@@ -5,7 +5,6 @@ using System.Windows.Data;
 using System.Windows.Input;
 using Lucene.Net.Index;
 using Lucene.Net.Search;
-using System.Linq;
 using Luke.Net.Features.OpenIndex;
 using Luke.Net.Infrastructure;
 using Luke.Net.Models;
@@ -20,7 +19,7 @@ namespace Luke.Net.Features.Overview
     {
         private readonly IEventAggregator _eventAggregator;
         private LuceneIndex _model;
-        private readonly List<FieldViewModel> _fields = new List<FieldViewModel>();
+        private readonly List<FieldInfo> _fields = new List<FieldInfo>();
 
         public FieldsViewModel(IEventAggregator eventAggregator)
         {
@@ -35,18 +34,8 @@ namespace Luke.Net.Features.Overview
             _model = index;
 
             _fields.Clear();
-            _fields.AddRange(GetFieldsSummary());
+            _fields.AddRange(_model.Fields);
             Fields.Refresh();
-        }
-
-        IEnumerable<FieldViewModel> GetFieldsSummary()
-        {
-            var fields = from doc in _model.Documents
-                         from field in doc.Fields
-                         group field by field.Field
-                             into fieldNameGroup
-                             select new FieldViewModel { Count = fieldNameGroup.Count(), Field = fieldNameGroup.Key };
-            return fields;
         }
 
         public ICommand InspectFields { get; set; }
@@ -63,12 +52,5 @@ namespace Luke.Net.Features.Overview
         }
 
         public ICollectionView Fields { get; private set; }
-    }
-
-    class FieldViewModel
-    {
-        public string Field { get; set; }
-        public int Count { get; set; }
-        public double Frequency { get; set; }
     }
 }
