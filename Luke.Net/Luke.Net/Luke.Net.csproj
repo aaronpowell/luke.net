@@ -73,9 +73,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Features\Documents\DocumentListView.xaml.cs">
+      <DependentUpon>DocumentListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Features\Documents\DocumentShell.xaml.cs">
       <DependentUpon>DocumentShell.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Features\Documents\DocumentsModule.cs" />
     <Compile Include="Features\LuceneShell.xaml.cs">
       <DependentUpon>LuceneShell.xaml</DependentUpon>
     </Compile>
@@ -111,6 +115,10 @@
     <Compile Include="Models\LuceneIndex.cs" />
     <Compile Include="Models\TermInfo.cs" />
     <Compile Include="Regions.cs" />
+    <Page Include="Features\Documents\DocumentListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Features\Documents\DocumentShell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

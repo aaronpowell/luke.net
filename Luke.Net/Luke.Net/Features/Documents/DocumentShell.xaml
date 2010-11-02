@@ -4,8 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
+             xmlns:prism="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+    
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <ContentControl DockPanel.Dock="Left" x:Name="BrowseDocByDocNo" prism:RegionManager.RegionName="BrowseDocByDocNoRegion" />
+            <ContentControl x:Name="BrowseDocByTerm" prism:RegionManager.RegionName="BrowseDocByTermsRegion" />
+        </DockPanel>
+
+        <ContentControl x:Name="DocumentList" prism:RegionManager.RegionName="DocumentListRegion" />
+    </DockPanel>
 </UserControl>
