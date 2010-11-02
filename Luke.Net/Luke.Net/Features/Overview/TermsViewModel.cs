@@ -37,15 +37,14 @@ namespace Luke.Net.Features.Overview
 
         void FilterTermsExecuted(IEnumerable<FieldInfo> fields)
         {
-            // ToDo: Termporary solution. Should think of a better way
             if (fields != null && fields.Any())
                 _fields = fields;
             else
                 _fields = _index.Fields;
 
             // notify that terms view has changed. 
-            // ToDo: should find a better way. 
             RaisePropertyChanged(() => Terms);
+            RaisePropertyChanged(() => TermCount);
         }
 
         private int _numberOfTopTerms = 50; // the default number of items to show
@@ -64,9 +63,6 @@ namespace Luke.Net.Features.Overview
         {
             get
             {
-                if (_index == null)
-                    return new TermInfo[] { }; // ToDo: just a quick hack. should be fixed
-
                 return _fields.SelectMany(f => f.Terms).OrderByDescending(t => t.Frequency).Take(NumberOfTopTerms);
             }
         }
