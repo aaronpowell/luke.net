@@ -22,7 +22,7 @@
                     <DataGridTextColumn Header="Field" Binding="{Binding Field}" />
                     <DataGridTextColumn Header="Term Count" Binding="{Binding Count}" />
                     <DataGridTextColumn Header="%" Binding="{Binding Frequency, StringFormat={}{0:F2}%}" />
-                    <DataGridTextColumn Header="Decoder" Binding="{Binding Decoder}" />
+                    <DataGridTextColumn Header="Decoder" Binding="{Binding Decoder}" Width="*" />
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
