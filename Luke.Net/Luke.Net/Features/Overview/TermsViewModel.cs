@@ -12,10 +12,14 @@ namespace Luke.Net.Features.Overview
 {
     public class TermsViewModel : NotificationObject
     {
-        private readonly List<TermInfo> _terms = new List<TermInfo>();
+        private LuceneIndex _index;
+        private IEnumerable<FieldInfo> _fields;
 
         public TermsViewModel(IEventAggregator eventAggregator)
         {
+            // just an empty array till an index is provided
+            _fields = new FieldInfo[] {};
+
             eventAggregator.GetEvent<SelectedFieldChangedEvent>().Subscribe(FilterTermsExecuted);
             eventAggregator.GetEvent<IndexLoadedEvent>().Subscribe(IndexChanged);
             FilterTerms = new RelayCommand<IEnumerable<FieldInfo>>(FilterTermsExecuted);
@@ -23,8 +27,8 @@ namespace Luke.Net.Features.Overview
 
         private void IndexChanged(LuceneIndex index)
         {
-            _terms.Clear();
-            _terms.AddRange(index.Terms);
+            _index = index;
+            _fields = _index.Fields;
             RaisePropertyChanged(() => Terms);
             RaisePropertyChanged(() => TermCount);
         }
@@ -35,9 +39,9 @@ namespace Luke.Net.Features.Overview
         {
             // ToDo: Termporary solution. Should think of a better way
             if (fields != null && fields.Any())
-                _termFilter = t => fields.Any(f => f.Field == t.Field);
+                _fields = fields;
             else
-                _termFilter = _defaultTermFilter;
+                _fields = _index.Fields;
 
             // notify that terms view has changed. 
             // ToDo: should find a better way. 
@@ -56,17 +60,14 @@ namespace Luke.Net.Features.Overview
             }
         }
 
-        private readonly Func<TermInfo, bool> _defaultTermFilter = t => true;
-        private Func<TermInfo, bool> _termFilter = t => true;
-
         public IEnumerable<TermInfo> Terms
         {
             get
             {
-                if (_terms == null)
+                if (_index == null)
                     return new TermInfo[] { }; // ToDo: just a quick hack. should be fixed
 
-                return _terms.Where(_termFilter).Take(NumberOfTopTerms);
+                return _fields.SelectMany(f => f.Terms).OrderByDescending(t => t.Frequency).Take(NumberOfTopTerms);
             }
         }
 
@@ -74,7 +75,7 @@ namespace Luke.Net.Features.Overview
         {
             get
             {
-                return _terms.Count();
+                return _fields.SelectMany(f => f.Terms).Count();
             }
         }
     }

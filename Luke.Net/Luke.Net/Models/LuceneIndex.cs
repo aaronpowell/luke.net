@@ -31,62 +31,67 @@ namespace Luke.Net.Models
 
         public bool Optimized { get; private set; }
 
-        public IEnumerable<TermInfo> Terms { get; private set; }
-
         public void LoadIndex(OpenIndexModel indexInfo)
         {
             //DirectoryInfo dir = new DirectoryInfo(indexInfo.IndexPath);
             var directory = indexInfo.Directory;
-            var indexReader = IndexReader.Open(directory, indexInfo.ReadOnly);
+            IndexReader indexReader = null;
 
-            var v = IndexGate.GetIndexFormat(directory);
-
-            var termCount = 0;
-            var terms = indexReader.Terms();
-
-            var fieldCounter = new List<FieldInfo>();
-
-            var termCounter = new List<TermInfo>();
-
-            while (terms.Next())
+            try
             {
-                var term = terms.Term();
-                string field = term.Field();
+                indexReader = IndexReader.Open(directory, indexInfo.ReadOnly);
+                var v = IndexGate.GetIndexFormat(directory);
 
-                if (fieldCounter.Any(x => x.Field == field))
+                var termCount = 0;
+                var terms = indexReader.Terms();
+
+                var fieldCounter = new List<FieldInfo>();
+
+                var termCounter = new List<TermInfo>();
+
+                while (terms.Next())
                 {
-                    fieldCounter.Single(x => x.Field == field).Count++;
-                }
-                else
-                {
-                    fieldCounter.Add(new FieldInfo
+                    var term = terms.Term();
+                    var field = fieldCounter.SingleOrDefault(x => x.Field == term.Field());
+
+                    if(field != null)
                     {
-                        Field = field,
-                        Count = 0,
-                    });
+                        field.Count++;
+                    }
+                    else
+                    {
+                        field = new FieldInfo {Count = 1, Field = term.Field()};
+                        fieldCounter.Add(field);
+                    }
+
+                    var termInfo = new TermInfo {Term = term.Text(), Field = field, Frequency = terms.DocFreq()};
+                    termCounter.Add(termInfo);
+                    field.AddTerm(termInfo);
+
+                    termCount++;
                 }
 
-                termCounter.Add(new TermInfo { Term = term.Text(), Field = field, Frequency = terms.DocFreq() });
-
-                termCount++;
+                IndexDetails = IndexGate.GetFormatDetails(v);
+                FieldCount = indexReader.GetFieldNames(IndexReader.FieldOption.ALL).Count;
+                TermCount = termCount;
+                //LastModified = dir.LastWriteTime, // IndexReader.LastModified(directory);
+                Version = indexReader.GetVersion().ToString("x");
+                DocumentCount = indexReader.NumDocs();
+                Fields = fieldCounter.Select(x =>
+                                                 {
+                                                     x.Frequency = ((double) x.Count*100)/termCount;
+                                                     return x;
+                                                 });
+                HasDeletions = indexReader.HasDeletions();
+                DeletionCount = indexReader.NumDeletedDocs();
+                Optimized = indexReader.IsOptimized();
+                OpenIndex = indexInfo;
             }
-
-            IndexDetails = IndexGate.GetFormatDetails(v);
-            FieldCount = indexReader.GetFieldNames(IndexReader.FieldOption.ALL).Count;
-            TermCount = termCount;
-            //LastModified = dir.LastWriteTime, // IndexReader.LastModified(directory);
-            Version = indexReader.GetVersion().ToString("x");
-            DocumentCount = indexReader.NumDocs();
-            Fields = fieldCounter.Select(x =>
-                                             {
-                                                 x.Frequency = ((double) x.Count*100)/termCount;
-                                                 return x;
-                                             });
-            HasDeletions = indexReader.HasDeletions();
-            DeletionCount = indexReader.NumDeletedDocs();
-            Optimized = indexReader.IsOptimized();
-            Terms = termCounter; 
-            OpenIndex = indexInfo;
+            finally
+            {
+                if (indexReader != null) 
+                    indexReader.Close();
+            }
         }
     }
 }
