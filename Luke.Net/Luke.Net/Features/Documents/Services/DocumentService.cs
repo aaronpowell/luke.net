@@ -50,7 +50,7 @@ namespace Luke.Net.Features.Documents.Services
                                     Binary = field.IsBinary(),
                                     OffsetTermVector = field.IsStoreOffsetWithTermVector(),
                                     PositionTermVector = field.IsStorePositionWithTermVector(),
-                                    Field = field.Name(),
+                                    Field = new Models.Field(field.Name()),
                                     Value = doc.Get(field.Name())
                                 });
 
