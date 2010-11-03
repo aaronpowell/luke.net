@@ -16,7 +16,7 @@
         </LinearGradientBrush>
     </Window.Background>
 
-    <Border Margin="10" Style="{StaticResource StandardBorder}" BorderBrush="Blue" Background="White" >
+    <Border Margin="10" Style="{StaticResource StandardBorder}">
         <DockPanel Margin="2">
             <ContentControl x:Name="OpenIndexRegion" prism:RegionManager.RegionName="{x:Static Net:Regions.OpenIndex}" DockPanel.Dock="Top" />
 

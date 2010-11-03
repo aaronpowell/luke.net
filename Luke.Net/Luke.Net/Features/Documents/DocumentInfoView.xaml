@@ -34,7 +34,7 @@
                     
                 </Grid>
                 
-                <Label DockPanel.Dock="Right" FontWeight="Bold" VerticalContentAlignment="Center">Flags:</Label>
+                <Label DockPanel.Dock="Right" Margin="3" FontWeight="Bold" VerticalContentAlignment="Center">Flags:</Label>
                 
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
                     <Label FontWeight="Bold">Doc #</Label>

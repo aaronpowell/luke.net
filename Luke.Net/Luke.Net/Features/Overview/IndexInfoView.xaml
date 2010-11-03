@@ -5,9 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Border Style="{StaticResource StandardBorder}">
-        <StackPanel Margin="5">
-            <Grid>
+    <StackPanel Margin="5" TextElement.Foreground="White"> <!-- ToDo: Setting foreground here is a dirty hack; i do not know where it is set to black-->
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="*" />
@@ -45,49 +44,44 @@
             <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding LastModified}" Style="{StaticResource Emphasise}" />
 
         </Grid>
-            <Separator Margin="0, 5" />
-        <Expander>
-            <Expander.Header>
-                <TextBlock Text="Additional index information" />
-            </Expander.Header>
+        
+        <Separator Margin="0, 5" />
 
-                <Grid Margin="5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Index Version:" Style="{StaticResource SmallFont}" />
-                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Version}" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Index Version:" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Version}" Style="{StaticResource SmallFont}" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Index Format:" Style="{StaticResource SmallFont}" />
-                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding IndexDetails.GenericName}" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Index Format:" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding IndexDetails.GenericName}" Style="{StaticResource SmallFont}" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Index Features:" Style="{StaticResource SmallFont}" />
-                    <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding IndexDetails.Capabilities}" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Index Features:" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding IndexDetails.Capabilities}" Style="{StaticResource SmallFont}" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="3" Text="TermInfos index divisor:" Style="{StaticResource SmallFont}" />
-                    <TextBlock Grid.Column="1" Grid.Row="3" Text="TermInfosDivisor" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="TermInfos index divisor:" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="3" Text="TermInfosDivisor" Style="{StaticResource SmallFont}" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Directory Type:" Style="{StaticResource SmallFont}" />
-                    <TextBlock Grid.Column="1" Grid.Row="4" Text="Directory" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="0" Grid.Row="4" Text="Directory Type:" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="4" Text="Directory" Style="{StaticResource SmallFont}" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="5" Text="Currently open commit points:" Style="{StaticResource SmallFont}" />
-                    <TextBlock Grid.Column="1" Grid.Row="5" Text="CommitPoint" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="0" Grid.Row="5" Text="Currently open commit points:" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="5" Text="CommitPoint" Style="{StaticResource SmallFont}" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="6" Text="Current commit user data:" Style="{StaticResource SmallFont}" />
-                    <TextBlock Grid.Column="1" Grid.Row="6" Text="CommitData" Style="{StaticResource SmallFont}" />
-                </Grid>
-        </Expander>
+            <TextBlock Grid.Column="0" Grid.Row="6" Text="Current commit user data:" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="6" Text="CommitData" Style="{StaticResource SmallFont}" />
+        </Grid>
     </StackPanel>
-    </Border>
 </UserControl>

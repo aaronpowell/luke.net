@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:prism="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism" xmlns:Net="clr-namespace:Luke.Net" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <Border Style="{StaticResource StandardBorder}">
         <TabControl>
             <TabItem Header="Overview">
                 <ContentControl x:Name="OverviewRegion" prism:RegionManager.RegionName="{x:Static Net:Regions.Overview}" />
@@ -19,5 +19,5 @@
             <TabItem Header="Plugins">
             </TabItem>
         </TabControl>
-    </Grid>
+    </Border>
 </UserControl>

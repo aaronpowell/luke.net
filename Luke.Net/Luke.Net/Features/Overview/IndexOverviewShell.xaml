@@ -7,13 +7,15 @@
     xmlns:prism="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism" xmlns:Net="clr-namespace:Luke.Net" d:DesignHeight="300" d:DesignWidth="662">
 
     <DockPanel>
-        <ContentControl 
-            DockPanel.Dock="Top" 
-            Name="indexInfo" 
-            prism:RegionManager.RegionName="{x:Static Net:Regions.IndexInfo}" />
+        <Expander DockPanel.Dock="Top" Header="Index Information" IsExpanded="False" Style="{StaticResource StandardBorder}">
+            <ContentControl 
+                DockPanel.Dock="Top" 
+                Name="indexInfo" 
+                prism:RegionManager.RegionName="{x:Static Net:Regions.IndexInfo}" />
+        </Expander>
 
         <Border Style="{StaticResource StandardBorder}">
-            <Grid Margin="5">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
