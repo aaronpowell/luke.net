@@ -25,7 +25,7 @@
                     <Label Grid.Column="0" Grid.Row="0" Content="I - Indexed" />
                     <Label Grid.Column="1" Grid.Row="0" Content="T - Tokenized" />
                     <Label Grid.Column="2" Grid.Row="0" Content="S - Stored" />
-                    <Label Grid.Column="3" Grid.Row="0" Content="V - Term Vector (o - Offset; p - Position)" />
+                    <Label Grid.Column="3" Grid.Row="0" Content="V - Term Vector (Vo - Offset; Vp - Position)" />
 
                     <Label Grid.Column="0" Grid.Row="1" Content="O - Omit Norms" />
                     <Label Grid.Column="1" Grid.Row="1" Content="f - Omit TF" />
@@ -50,7 +50,15 @@
                     ItemsSource="{Binding Fields}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Field" Binding="{Binding Field}" />
-                        <DataGridTextColumn Header="ITSVopOfLB" />
+                        <DataGridCheckBoxColumn Header="I" Binding="{Binding Indexed}" />
+                        <DataGridCheckBoxColumn Header="T" Binding="{Binding Tokenized}" />
+                        <DataGridCheckBoxColumn Header="S" Binding="{Binding Stored}" />
+                        <DataGridCheckBoxColumn Header="Vo" Binding="{Binding OffsetTermVector}" />
+                        <DataGridCheckBoxColumn Header="Vp" Binding="{Binding PositionTermVector}" />
+                        <DataGridCheckBoxColumn Header="O" Binding="{Binding OmitNorms}" />
+                        <DataGridCheckBoxColumn Header="f" Binding="{Binding OmitTermFrequency}" />
+                        <DataGridCheckBoxColumn Header="L" Binding="{Binding Lazy}" />
+                        <DataGridCheckBoxColumn Header="B" Binding="{Binding Binary}" />
                         <DataGridTextColumn Header="Norm" />
                         <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="*" />
                     </DataGrid.Columns>

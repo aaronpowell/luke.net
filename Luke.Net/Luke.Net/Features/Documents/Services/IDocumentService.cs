@@ -48,6 +48,15 @@ namespace Luke.Net.Features.Documents.Services
                     .Select(field =>
                             new FieldByDocumentInfo
                             {
+                                Indexed = field.IsIndexed(),
+                                Tokenized = field.IsTokenized(),
+                                Stored = field.IsStored(),
+                                OmitNorms = field.GetOmitNorms(),
+                                OmitTermFrequency = field.GetOmitTermFreqAndPositions(),
+                                Lazy = field.IsLazy(),
+                                Binary = field.IsBinary(),
+                                OffsetTermVector = field.IsStoreOffsetWithTermVector(),
+                                PositionTermVector = field.IsStorePositionWithTermVector(),
                                 Field = field.Name(),
                                 Value = doc.Get(field.Name())
                             });
