@@ -76,18 +76,21 @@
     <Compile Include="Features\Documents\BrowseByDocumentNoView.xaml.cs">
       <DependentUpon>BrowseByDocumentNoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Features\Documents\BrowseByDocumentNoViewModel.cs" />
     <Compile Include="Features\Documents\BrowseByTermView.xaml.cs">
       <DependentUpon>BrowseByTermView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Features\Documents\DocumentListView.xaml.cs">
-      <DependentUpon>DocumentListView.xaml</DependentUpon>
+    <Compile Include="Features\Documents\BrowseToDocumentEvent.cs" />
+    <Compile Include="Features\Documents\DocumentInfoView.xaml.cs">
+      <DependentUpon>DocumentInfoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Features\Documents\DocumentListViewModel.cs" />
+    <Compile Include="Features\Documents\DocumentInfoViewModel.cs" />
     <Compile Include="Features\Documents\DocumentShell.xaml.cs">
       <DependentUpon>DocumentShell.xaml</DependentUpon>
     </Compile>
     <Compile Include="Features\Documents\DocumentsModule.cs" />
     <Compile Include="Features\Documents\FieldByDocumentInfo.cs" />
+    <Compile Include="Features\Documents\Services\IDocumentService.cs" />
     <Compile Include="Features\LuceneShell.xaml.cs">
       <DependentUpon>LuceneShell.xaml</DependentUpon>
     </Compile>
@@ -106,11 +109,12 @@
     <Compile Include="Features\Overview\Services\IndexOverviewService.cs" />
     <Compile Include="Features\Overview\OverviewModule.cs" />
     <Compile Include="Features\Documents\DocumentInfo.cs" />
-    <Compile Include="Features\Overview\SelectedFieldChangedEvent.xaml.cs" />
+    <Compile Include="Features\Overview\SelectedFieldChangedEvent.cs" />
     <Compile Include="Features\Overview\TermsView.xaml.cs">
       <DependentUpon>TermsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Features\OpenIndex\OpenIndexModel.cs" />
+    <Compile Include="Infrastructure\ValueConverters\AdditionValueConverter.cs" />
     <Compile Include="Models\Events\IndexChangedEvent.cs" />
     <Compile Include="Features\Overview\TermsViewModel.cs" />
     <Compile Include="Infrastructure\RelayCommand.cs" />
@@ -133,7 +137,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Features\Documents\DocumentListView.xaml">
+    <Page Include="Features\Documents\DocumentInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

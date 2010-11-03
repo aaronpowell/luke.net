@@ -6,9 +6,10 @@ namespace Luke.Net.Features.Documents
     {
         private readonly List<FieldByDocumentInfo> _fields;
 
-        public DocumentInfo(IEnumerable<FieldByDocumentInfo> fields)
+        public DocumentInfo(int documentNo, IEnumerable<FieldByDocumentInfo> fields)
         {
             _fields = new List<FieldByDocumentInfo>(fields);
+            DocumentNumber = documentNo;
         }
 
         public void AddField(FieldByDocumentInfo fieldByTerm)
@@ -23,5 +24,7 @@ namespace Luke.Net.Features.Documents
                 return _fields;
             }
         }
+
+        public int DocumentNumber { get; private set; }
     }
 }

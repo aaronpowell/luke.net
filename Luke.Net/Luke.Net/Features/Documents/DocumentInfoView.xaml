@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Luke.Net.Features.Documents.DocumentListView"
+﻿<UserControl x:Class="Luke.Net.Features.Documents.DocumentInfoView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -45,12 +45,14 @@
             <!-- The actual document list-->
             <Grid>
                 <DataGrid 
+                    AutoGenerateColumns="false"
+                    IsReadOnly="True"
                     ItemsSource="{Binding Fields}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Field" />
+                        <DataGridTextColumn Header="Field" Binding="{Binding Field}" />
                         <DataGridTextColumn Header="ITSVopOfLB" />
                         <DataGridTextColumn Header="Norm" />
-                        <DataGridTextColumn Header="Value" Width="*" />
+                        <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
