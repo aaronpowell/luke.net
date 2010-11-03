@@ -6,13 +6,5 @@
         public FieldByTermInfo Field { get; set; }
         public string Term { get; set; }
         public int Frequency { get; set; }
-
-        public string FieldName
-        {
-            get
-            {
-                return Field.Field.FieldName;
-            }
-        }
     }
 }

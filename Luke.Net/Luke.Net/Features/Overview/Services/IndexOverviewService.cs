@@ -72,7 +72,7 @@ namespace Luke.Net.Features.Overview.Services
                 while (terms.Next())
                 {
                     var term = terms.Term();
-                    var field = _fields.SingleOrDefault(x => x.Field.FieldName == term.Field());
+                    var field = _fields.SingleOrDefault(x => x.Field == term.Field());
 
                     if (field != null)
                     {
@@ -80,7 +80,7 @@ namespace Luke.Net.Features.Overview.Services
                     }
                     else
                     {
-                        field = new FieldByTermInfo { Count = 1, Field = new Field(term.Field()) };
+                        field = new FieldByTermInfo { Count = 1, Field = term.Field() };
                         _fields.Add(field);
                     }
 

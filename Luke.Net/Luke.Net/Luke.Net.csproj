@@ -129,7 +129,6 @@
     <Compile Include="Features\Overview\FieldByTermInfo.cs" />
     <Compile Include="Features\Overview\IndexInfo.cs" />
     <Compile Include="Features\Overview\TermInfo.cs" />
-    <Compile Include="Models\Field.cs" />
     <Compile Include="Regions.cs" />
     <Page Include="Features\Documents\BrowseByDocumentNoView.xaml">
       <SubType>Designer</SubType>

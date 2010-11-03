@@ -1,10 +1,8 @@
-﻿using Luke.Net.Models;
-
-namespace Luke.Net.Features.Documents
+﻿namespace Luke.Net.Features.Documents
 {
     public class FieldByDocumentInfo
     {
-        public Field Field { get; set; }
+        public string Field { get; set; }
         public string Value { get; set; }
         public bool PositionTermVector { get; set; }
         public bool OffsetTermVector { get; set; }

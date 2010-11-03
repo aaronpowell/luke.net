@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
@@ -50,7 +51,7 @@ namespace Luke.Net.Features.Documents.Services
                                     Binary = field.IsBinary(),
                                     OffsetTermVector = field.IsStoreOffsetWithTermVector(),
                                     PositionTermVector = field.IsStorePositionWithTermVector(),
-                                    Field = new Models.Field(field.Name()),
+                                    Field = field.Name(),
                                     Value = doc.Get(field.Name())
                                 });
 
@@ -73,6 +74,24 @@ namespace Luke.Net.Features.Documents.Services
                 indexReader = IndexReader.Open(directory, _openIndexModel.ReadOnly);
 
                 return indexReader.NumDocs(); 
+            }
+            finally
+            {
+                if (indexReader != null)
+                    indexReader.Close();
+            }
+        }
+
+        public IEnumerable<string> GetFields()
+        {
+            IndexReader indexReader = null;
+
+            try
+            {
+                var directory = _openIndexModel.Directory;
+                indexReader = IndexReader.Open(directory, _openIndexModel.ReadOnly);
+
+                return indexReader.GetFieldNames(IndexReader.FieldOption.ALL);
             }
             finally
             {

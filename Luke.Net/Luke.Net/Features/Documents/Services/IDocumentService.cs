@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Luke.Net.Models;
 
 namespace Luke.Net.Features.Documents.Services
 {
@@ -7,5 +8,6 @@ namespace Luke.Net.Features.Documents.Services
         IEnumerable<DocumentInfo> GetDocumentsInfo();
         DocumentInfo GetDocumentInfo(int documentNo);
         int GetNumberOfDocuments();
+        IEnumerable<string> GetFields();
     }
 }
