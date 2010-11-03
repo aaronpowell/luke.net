@@ -126,7 +126,6 @@
       <DependentUpon>OpenIndexView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Features\Overview\FieldByTermInfo.cs" />
-    <Compile Include="Models\Events\IndexLoadedEvent.cs" />
     <Compile Include="Features\Overview\IndexInfo.cs" />
     <Compile Include="Features\Overview\TermInfo.cs" />
     <Compile Include="Regions.cs" />
