@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using Luke.Net.Features.Overview.Services;
 using Luke.Net.Infrastructure;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
@@ -9,12 +10,12 @@ namespace Luke.Net.Features.Overview
 {
     public class TermsViewModel : NotificationObject
     {
-        private readonly ITermService _termService;
+        private readonly IIndexOverviewService _indexOverviewService;
         private IEnumerable<FieldByTermInfo> _fields;
 
-        public TermsViewModel(IEventAggregator eventAggregator, ITermService termService)
+        public TermsViewModel(IEventAggregator eventAggregator, IIndexOverviewService indexOverviewService)
         {
-            _termService = termService;
+            _indexOverviewService = indexOverviewService;
 
             // just an empty array till an index is provided
             _fields = new FieldByTermInfo[] {};
@@ -27,7 +28,7 @@ namespace Luke.Net.Features.Overview
 
         private void LoadModel()
         {
-            _fields = _termService.GetFieldsAndTerms();
+            _fields = _indexOverviewService.GetFieldsAndTerms();
             RaisePropertyChanged(() => Terms);
             RaisePropertyChanged(() => TermCount);
         }
@@ -39,7 +40,7 @@ namespace Luke.Net.Features.Overview
             if (fields != null && fields.Any())
                 _fields = fields;
             else
-                _fields = _termService.GetFieldsAndTerms();
+                _fields = _indexOverviewService.GetFieldsAndTerms();
 
             // notify that terms view has changed. 
             RaisePropertyChanged(() => Terms);

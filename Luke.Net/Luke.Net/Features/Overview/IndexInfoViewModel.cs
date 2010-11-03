@@ -1,7 +1,5 @@
 ﻿using System;
-using Luke.Net.Features.OpenIndex;
-using Luke.Net.Models;
-using Luke.Net.Models.Events;
+using Luke.Net.Features.Overview.Services;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 
@@ -10,29 +8,29 @@ namespace Luke.Net.Features.Overview
     public class IndexInfoViewModel : NotificationObject
     {
         private readonly IEventAggregator _eventAggregator;
+        private readonly IIndexOverviewService _indexOverviewService;
 
-        public IndexInfoViewModel(IEventAggregator eventAggregator)
+        public IndexInfoViewModel(IEventAggregator eventAggregator, IIndexOverviewService indexOverviewService)
         {
             _eventAggregator = eventAggregator;
-            _eventAggregator.GetEvent<IndexLoadedEvent>().Subscribe(IndexLoaded);
-            _eventAggregator.GetEvent<IndexChangedEvent>().Subscribe(IndexChanged);
+            _indexOverviewService = indexOverviewService;
+
+            LoadModel();
         }
 
-        private void IndexChanged(OpenIndexModel index)
+        private void LoadModel()
         {
-            IndexPath = index.Path;
-        }
+            var indexInfo = _indexOverviewService.GetIndexInfo();
 
-        private void IndexLoaded(LuceneIndex index)
-        {
-            FieldCount = index.FieldCount;
-            DocumentCount = index.DocumentCount;
-            TermCount = index.TermCount;
-            HasDeletions = index.HasDeletions;
-            DeletionCount = index.DeletionCount;
-            LastModified = index.LastModified;
-            Version = index.Version;
-            Optimized = index.Optimized;
+            FieldCount = indexInfo.FieldCount;
+            DocumentCount = indexInfo.DocumentCount;
+            TermCount = indexInfo.TermCount;
+            HasDeletions = indexInfo.HasDeletions;
+            DeletionCount = indexInfo.DeletionCount;
+            LastModified = indexInfo.LastModified;
+            Version = indexInfo.Version;
+            Optimized = indexInfo.Optimized;
+            IndexPath = indexInfo.IndexPath;
         }
 
         private string _indexPath;

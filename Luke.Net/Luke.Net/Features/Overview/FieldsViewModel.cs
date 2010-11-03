@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
+using Luke.Net.Features.Overview.Services;
 using Luke.Net.Infrastructure;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
@@ -11,13 +12,13 @@ namespace Luke.Net.Features.Overview
     public class FieldsViewModel : NotificationObject
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly ITermService _termService;
+        private readonly IIndexOverviewService _indexOverviewService;
         private readonly List<FieldByTermInfo> _fields = new List<FieldByTermInfo>();
 
-        public FieldsViewModel(IEventAggregator eventAggregator, ITermService termService)
+        public FieldsViewModel(IEventAggregator eventAggregator, IIndexOverviewService indexOverviewService)
         {
             _eventAggregator = eventAggregator;
-            _termService = termService;
+            _indexOverviewService = indexOverviewService;
             InspectFields = new RelayCommand<IEnumerable<FieldByTermInfo>>(InspectFieldsExecuted);
             Fields = new ListCollectionView(_fields);
 
@@ -27,7 +28,7 @@ namespace Luke.Net.Features.Overview
         private void LoadModel()
         {
             _fields.Clear();
-            _fields.AddRange(_termService.GetFieldsAndTerms());
+            _fields.AddRange(_indexOverviewService.GetFieldsAndTerms());
             Fields.Refresh();
         }
 

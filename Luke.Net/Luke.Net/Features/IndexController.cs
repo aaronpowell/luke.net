@@ -1,5 +1,5 @@
 ﻿using Luke.Net.Features.OpenIndex;
-using Luke.Net.Models;
+using Luke.Net.Features.Overview;
 using Luke.Net.Models.Events;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
@@ -12,15 +12,12 @@ namespace Luke.Net.Features
         private readonly IEventAggregator _eventAggregator;
         private readonly IRegionManager _regionManager;
         private readonly IUnityContainer _container;
-        private LuceneIndex _model;
 
         public IndexController(
             IEventAggregator eventAggregator,
             IRegionManager regionManager,
             IUnityContainer container)
         {
-            // ToDo: just a rough cut; still not quite sure who should create the model
-            _model = new LuceneIndex();
             _eventAggregator = eventAggregator;
             _regionManager = regionManager;
             _container = container;
@@ -31,7 +28,6 @@ namespace Luke.Net.Features
         {
             App.OpenIndexModel = newIndex;
 
-            _model.LoadIndex(newIndex);
             _container.Resolve<LukeModule>().Initialize();
         }
     }
