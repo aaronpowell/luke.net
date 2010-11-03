@@ -90,6 +90,7 @@
     </Compile>
     <Compile Include="Features\Documents\DocumentsModule.cs" />
     <Compile Include="Features\Documents\FieldByDocumentInfo.cs" />
+    <Compile Include="Features\Documents\Services\DocumentService.cs" />
     <Compile Include="Features\Documents\Services\IDocumentService.cs" />
     <Compile Include="Features\LuceneShell.xaml.cs">
       <DependentUpon>LuceneShell.xaml</DependentUpon>
