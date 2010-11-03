@@ -23,6 +23,12 @@ namespace Luke.Net.Features.Documents
             _regionManager.RegisterViewWithRegion(
                 Regions.DocumentListRegion,
                 () => _unityContainer.Resolve<DocumentListView>());
+            _regionManager.RegisterViewWithRegion(
+                Regions.BrowseDocByDocNoRegion,
+                () => _unityContainer.Resolve<BrowseByDocumentNoView>());
+            _regionManager.RegisterViewWithRegion(
+                Regions.BrowseDocByTermsRegion,
+                () => _unityContainer.Resolve<BrowseByTermView>());
         }
     }
 }

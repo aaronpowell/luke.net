@@ -73,6 +73,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Features\Documents\BrowseByDocumentNoView.xaml.cs">
+      <DependentUpon>BrowseByDocumentNoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Documents\BrowseByTermView.xaml.cs">
+      <DependentUpon>BrowseByTermView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Features\Documents\DocumentListView.xaml.cs">
       <DependentUpon>DocumentListView.xaml</DependentUpon>
     </Compile>
@@ -115,6 +121,14 @@
     <Compile Include="Models\LuceneIndex.cs" />
     <Compile Include="Models\TermInfo.cs" />
     <Compile Include="Regions.cs" />
+    <Page Include="Features\Documents\BrowseByDocumentNoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Features\Documents\BrowseByTermView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Features\Documents\DocumentListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

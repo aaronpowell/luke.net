@@ -4,15 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             xmlns:prism="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
-             d:DesignHeight="300" d:DesignWidth="300">
+             xmlns:prism="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism" xmlns:Net="clr-namespace:Luke.Net" d:DesignHeight="300" d:DesignWidth="300">
     
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
-            <ContentControl DockPanel.Dock="Left" x:Name="BrowseDocByDocNo" prism:RegionManager.RegionName="BrowseDocByDocNoRegion" />
-            <ContentControl x:Name="BrowseDocByTerm" prism:RegionManager.RegionName="BrowseDocByTermsRegion" />
+            <ContentControl DockPanel.Dock="Left" x:Name="BrowseDocByDocNo" prism:RegionManager.RegionName="{x:Static Net:Regions.BrowseDocByDocNoRegion}" />
+            <ContentControl x:Name="BrowseDocByTerm" prism:RegionManager.RegionName="{x:Static Net:Regions.BrowseDocByTermsRegion}" />
         </DockPanel>
 
-        <ContentControl x:Name="DocumentList" prism:RegionManager.RegionName="DocumentListRegion" />
+        <ContentControl x:Name="DocumentList" prism:RegionManager.RegionName="{x:Static Net:Regions.DocumentListRegion}" />
     </DockPanel>
 </UserControl>
