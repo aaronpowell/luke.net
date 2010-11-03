@@ -10,7 +10,7 @@ namespace Luke.Net.Features.Overview
             _terms = new List<TermInfo>();
         }
 
-        public Field Field { get; set; }
+        public string Field { get; set; }
         public int Count { get; set; }
         public double Frequency { get; set; }
         private readonly List<TermInfo> _terms;
