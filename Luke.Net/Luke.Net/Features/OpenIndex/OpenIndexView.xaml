@@ -4,9 +4,8 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" d:DesignWidth="394">
-    
-    <Border Style="{StaticResource StandardBorder}">
-        <Expander Margin="5" DockPanel.Dock="Top" Header="Load Index" x:Name="loadIndexExpander">
+
+    <Expander Style="{StaticResource StandardBorder}" Header="Load Index" x:Name="loadIndexExpander">
         <StackPanel Margin="10" Orientation="Horizontal" VerticalAlignment="Top">
             <Label>Index Path</Label>
             <TextBox Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -14,5 +13,4 @@
             <Button Content="Open Index" HorizontalAlignment="Right" Click="Button_Click" Command="{Binding LoadIndexExecuted}" />
         </StackPanel>
     </Expander>
-    </Border>
 </UserControl>
