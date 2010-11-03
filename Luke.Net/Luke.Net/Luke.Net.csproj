@@ -102,7 +102,8 @@
     </Compile>
     <Compile Include="Features\LukeModule.cs" />
     <Compile Include="Features\Overview\IndexInfoViewModel.cs" />
-    <Compile Include="Features\Overview\ITermService.cs" />
+    <Compile Include="Features\Overview\Services\IIndexOverviewService.cs" />
+    <Compile Include="Features\Overview\Services\IndexOverviewService.cs" />
     <Compile Include="Features\Overview\OverviewModule.cs" />
     <Compile Include="Features\Documents\DocumentInfo.cs" />
     <Compile Include="Features\Overview\SelectedFieldChangedEvent.xaml.cs" />
@@ -121,7 +122,7 @@
     </Compile>
     <Compile Include="Features\Overview\FieldByTermInfo.cs" />
     <Compile Include="Models\Events\IndexLoadedEvent.cs" />
-    <Compile Include="Models\LuceneIndex.cs" />
+    <Compile Include="Features\Overview\IndexInfo.cs" />
     <Compile Include="Features\Overview\TermInfo.cs" />
     <Compile Include="Regions.cs" />
     <Page Include="Features\Documents\BrowseByDocumentNoView.xaml">

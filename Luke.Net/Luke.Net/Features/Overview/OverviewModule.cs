@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.Modularity;
+﻿using Luke.Net.Features.Overview.Services;
+using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 
@@ -17,7 +18,7 @@ namespace Luke.Net.Features.Overview
 
         public void Initialize()
         {
-            _container.RegisterType<ITermService, TermService>();
+            _container.RegisterType<IIndexOverviewService, IndexOverviewService>();
 
             _regionManager.RegisterViewWithRegion(
                 Regions.Overview, 
