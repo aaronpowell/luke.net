@@ -1,6 +1,4 @@
-﻿using System;
-using Luke.Net.Features.OpenIndex;
-using Luke.Net.Features.Overview;
+﻿using Luke.Net.Features.OpenIndex;
 using Luke.Net.Models;
 using Luke.Net.Models.Events;
 using Microsoft.Practices.Prism.Events;
@@ -31,9 +29,10 @@ namespace Luke.Net.Features
 
         private void UpdateIndex(OpenIndexModel newIndex)
         {
-            _model.LoadIndex(newIndex);
+            App.OpenIndexModel = newIndex;
 
-            _eventAggregator.GetEvent<IndexLoadedEvent>().Publish(_model);
+            _model.LoadIndex(newIndex);
+            _container.Resolve<LukeModule>().Initialize();
         }
     }
 

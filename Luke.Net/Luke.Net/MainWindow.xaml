@@ -20,7 +20,14 @@
         <DockPanel Margin="2">
             <ContentControl x:Name="OpenIndexRegion" prism:RegionManager.RegionName="{x:Static Net:Regions.OpenIndex}" DockPanel.Dock="Top" />
 
-            <ContentControl x:Name="IndexRegion" prism:RegionManager.RegionName="{x:Static Net:Regions.IndexRegion}" DockPanel.Dock="Top" />
+            <Grid>
+                <StackPanel TextElement.FontStyle="Italic" TextElement.FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                    <Label>Index not loaded yet...</Label>
+                    <Label>Please load an index</Label>
+                </StackPanel>
+
+                <ContentControl x:Name="IndexRegion" prism:RegionManager.RegionName="{x:Static Net:Regions.IndexRegion}" />
+            </Grid>
         </DockPanel>
     </Border>
 </Window>

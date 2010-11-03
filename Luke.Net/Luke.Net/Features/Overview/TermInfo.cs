@@ -1,9 +1,9 @@
-﻿namespace Luke.Net.Models
+﻿namespace Luke.Net.Features.Overview
 {
     public class TermInfo
     {
         public int Rank { get; set; }
-        public FieldInfo Field { get; set; }
+        public FieldByTermInfo FieldByTerm { get; set; }
         public string Term { get; set; }
         public int Frequency { get; set; }
     }

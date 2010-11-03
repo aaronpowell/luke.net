@@ -6,29 +6,31 @@ namespace Luke.Net.Features.Overview
 {
     class OverviewModule : IModule
     {
-        private readonly IUnityContainer _unityContainer;
+        private readonly IUnityContainer _container;
         private readonly IRegionManager _regionManager;
 
         public OverviewModule(IUnityContainer unityContainer, IRegionManager regionManager)
         {
-            _unityContainer = unityContainer;
+            _container = unityContainer;
             _regionManager = regionManager;
         }
 
         public void Initialize()
         {
+            _container.RegisterType<ITermService, TermService>();
+
             _regionManager.RegisterViewWithRegion(
                 Regions.Overview, 
-                () => _unityContainer.Resolve<IndexOverviewShell>());
+                () => _container.Resolve<IndexOverviewShell>());
             _regionManager.RegisterViewWithRegion(
                 Regions.OverviewFields,
-                () => _unityContainer.Resolve<FieldsView>());
+                () => _container.Resolve<FieldsView>());
             _regionManager.RegisterViewWithRegion(
                 Regions.OverviewTerms,
-                () => _unityContainer.Resolve<TermsView>());
+                () => _container.Resolve<TermsView>());
             _regionManager.RegisterViewWithRegion(
                 Regions.IndexInfo,
-                () => _unityContainer.Resolve<IndexInfoView>());
+                () => _container.Resolve<IndexInfoView>());
         }
     }
 }
