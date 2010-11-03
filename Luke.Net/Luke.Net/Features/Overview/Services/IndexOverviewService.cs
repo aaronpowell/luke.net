@@ -83,7 +83,7 @@ namespace Luke.Net.Features.Overview.Services
                         _fields.Add(field);
                     }
 
-                    var termInfo = new TermInfo { Term = term.Text(), FieldByTerm = field, Frequency = terms.DocFreq() };
+                    var termInfo = new TermInfo { Term = term.Text(), Field = field, Frequency = terms.DocFreq() };
                     field.AddTerm(termInfo);
 
                     termCount++;
