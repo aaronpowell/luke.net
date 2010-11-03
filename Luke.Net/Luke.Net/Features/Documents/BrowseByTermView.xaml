@@ -22,7 +22,7 @@
             <DockPanel>
                 <Button DockPanel.Dock="Left">First Term</Button>
                 <Label DockPanel.Dock="Left">Term: </Label>
-                <ComboBox DockPanel.Dock="Left"></ComboBox>
+                <ComboBox DockPanel.Dock="Left" ItemsSource="{Binding Fields}" />
                 <Button DockPanel.Dock="Right">Next</Button>
                 <TextBox></TextBox>
             </DockPanel>

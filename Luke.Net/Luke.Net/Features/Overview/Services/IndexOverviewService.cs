@@ -4,6 +4,7 @@ using System.Linq;
 using Lucene.Net.Index;
 using Luke.Net.Features.OpenIndex;
 using Luke.Net.Infrastructure.Utilities;
+using Luke.Net.Models;
 
 namespace Luke.Net.Features.Overview.Services
 {
@@ -71,7 +72,7 @@ namespace Luke.Net.Features.Overview.Services
                 while (terms.Next())
                 {
                     var term = terms.Term();
-                    var field = _fields.SingleOrDefault(x => x.Field == term.Field());
+                    var field = _fields.SingleOrDefault(x => x.Field.FieldName == term.Field());
 
                     if (field != null)
                     {
@@ -79,7 +80,7 @@ namespace Luke.Net.Features.Overview.Services
                     }
                     else
                     {
-                        field = new FieldByTermInfo { Count = 1, Field = term.Field() };
+                        field = new FieldByTermInfo { Count = 1, Field = new Field(term.Field()) };
                         _fields.Add(field);
                     }
 

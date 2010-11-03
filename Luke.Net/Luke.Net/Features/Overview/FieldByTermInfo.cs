@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Luke.Net.Models;
 
 namespace Luke.Net.Features.Overview
 {
@@ -9,7 +10,7 @@ namespace Luke.Net.Features.Overview
             _terms = new List<TermInfo>();
         }
 
-        public string Field { get; set; }
+        public Field Field { get; set; }
         public int Count { get; set; }
         public double Frequency { get; set; }
         private readonly List<TermInfo> _terms;
