@@ -32,10 +32,6 @@ namespace Luke.Net
             Container.RegisterInstance<IIndexController>(Container.Resolve<IndexController>());
 
             Container.Resolve<OpenIndexModule>().Initialize();
-            Container.Resolve<LukeModule>().Initialize();
-
-            Container.Resolve<OverviewModule>().Initialize();
-            Container.Resolve<DocumentsModule>().Initialize();
         }
     }
 }

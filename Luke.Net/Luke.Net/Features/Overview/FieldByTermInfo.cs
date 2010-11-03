@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace Luke.Net.Models
+namespace Luke.Net.Features.Overview
 {
-    public class FieldInfo
+    public class FieldByTermInfo
     {
-        public FieldInfo()
+        public FieldByTermInfo()
         {
             _terms = new List<TermInfo>();
         }

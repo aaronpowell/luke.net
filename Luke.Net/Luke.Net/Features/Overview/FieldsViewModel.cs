@@ -1,54 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
-using Lucene.Net.Index;
-using Lucene.Net.Search;
-using Luke.Net.Features.OpenIndex;
 using Luke.Net.Infrastructure;
-using Luke.Net.Models;
-using Luke.Net.Models.Events;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
-using FieldInfo = Luke.Net.Models.FieldInfo;
 
 namespace Luke.Net.Features.Overview
 {
     public class FieldsViewModel : NotificationObject
     {
         private readonly IEventAggregator _eventAggregator;
-        private LuceneIndex _model;
-        private readonly List<FieldInfo> _fields = new List<FieldInfo>();
+        private readonly ITermService _termService;
+        private readonly List<FieldByTermInfo> _fields = new List<FieldByTermInfo>();
 
-        public FieldsViewModel(IEventAggregator eventAggregator)
+        public FieldsViewModel(IEventAggregator eventAggregator, ITermService termService)
         {
             _eventAggregator = eventAggregator;
-            InspectFields = new RelayCommand<IEnumerable<FieldInfo>>(InspectFieldsExecuted);
-            eventAggregator.GetEvent<IndexLoadedEvent>().Subscribe(IndexChanged);
+            _termService = termService;
+            InspectFields = new RelayCommand<IEnumerable<FieldByTermInfo>>(InspectFieldsExecuted);
             Fields = new ListCollectionView(_fields);
+
+            LoadModel();
         }
 
-        private void IndexChanged(LuceneIndex index)
+        private void LoadModel()
         {
-            _model = index;
-
             _fields.Clear();
-            _fields.AddRange(_model.Fields);
+            _fields.AddRange(_termService.GetFieldsAndTerms());
             Fields.Refresh();
         }
 
         public ICommand InspectFields { get; set; }
 
-        void InspectFieldsExecuted(IEnumerable<FieldInfo> fields)
+        void InspectFieldsExecuted(IEnumerable<FieldByTermInfo> fields)
         {
-            var searcher = new IndexSearcher(_model.OpenIndex.Directory, true);
-
-            var q = new BooleanQuery();
-            foreach (var field in fields)
-            {
-                q.Add(new TermQuery(new Term(field.Field)), BooleanClause.Occur.SHOULD);
-            }
         }
 
         public ICollectionView Fields { get; private set; }

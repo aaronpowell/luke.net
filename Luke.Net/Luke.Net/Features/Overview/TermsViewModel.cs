@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using Luke.Net.Infrastructure;
-using Luke.Net.Models;
-using Luke.Net.Models.Events;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 
@@ -12,35 +9,37 @@ namespace Luke.Net.Features.Overview
 {
     public class TermsViewModel : NotificationObject
     {
-        private LuceneIndex _index;
-        private IEnumerable<FieldInfo> _fields;
+        private readonly ITermService _termService;
+        private IEnumerable<FieldByTermInfo> _fields;
 
-        public TermsViewModel(IEventAggregator eventAggregator)
+        public TermsViewModel(IEventAggregator eventAggregator, ITermService termService)
         {
+            _termService = termService;
+
             // just an empty array till an index is provided
-            _fields = new FieldInfo[] {};
+            _fields = new FieldByTermInfo[] {};
 
             eventAggregator.GetEvent<SelectedFieldChangedEvent>().Subscribe(FilterTermsExecuted);
-            eventAggregator.GetEvent<IndexLoadedEvent>().Subscribe(IndexChanged);
-            FilterTerms = new RelayCommand<IEnumerable<FieldInfo>>(FilterTermsExecuted);
+            FilterTerms = new RelayCommand<IEnumerable<FieldByTermInfo>>(FilterTermsExecuted);
+
+            LoadModel();
         }
 
-        private void IndexChanged(LuceneIndex index)
+        private void LoadModel()
         {
-            _index = index;
-            _fields = _index.Fields;
+            _fields = _termService.GetFieldsAndTerms();
             RaisePropertyChanged(() => Terms);
             RaisePropertyChanged(() => TermCount);
         }
 
         public ICommand FilterTerms { get; set; }
 
-        void FilterTermsExecuted(IEnumerable<FieldInfo> fields)
+        void FilterTermsExecuted(IEnumerable<FieldByTermInfo> fields)
         {
             if (fields != null && fields.Any())
                 _fields = fields;
             else
-                _fields = _index.Fields;
+                _fields = _termService.GetFieldsAndTerms();
 
             // notify that terms view has changed. 
             RaisePropertyChanged(() => Terms);

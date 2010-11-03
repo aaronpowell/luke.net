@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Data;
+using Luke.Net.Features.Overview;
 using Luke.Net.Models;
 
 namespace Luke.Net.Infrastructure.ValueConverters
@@ -12,7 +13,7 @@ namespace Luke.Net.Infrastructure.ValueConverters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var grid = (DataGrid) value;
-            var selectedFields = grid.SelectedItems.Cast<FieldInfo>();
+            var selectedFields = grid.SelectedItems.Cast<FieldByTermInfo>();
             return selectedFields;
         }
 
