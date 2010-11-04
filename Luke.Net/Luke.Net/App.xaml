@@ -6,11 +6,15 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources\ExpressionDark.xaml" />
+                
                 <ResourceDictionary>
                     <ValueConverters:PercentageValueConverter x:Key="PercentageConverter" />
                     <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
                     <ValueConverters:BooleanToWordValueConverter x:Key="BoolToWord" />
 
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+                    </Style>
                     <Style x:Key="SmallFont" TargetType="TextBlock">
                         <Setter Property="FontSize" Value="10" />
                     </Style>
