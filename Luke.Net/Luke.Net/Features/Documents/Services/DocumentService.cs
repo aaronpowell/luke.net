@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
+using Lucene.Net.QueryParsers;
+using Lucene.Net.Search;
 using Luke.Net.Features.OpenIndex;
+using Luke.Net.Models;
 
 namespace Luke.Net.Features.Documents.Services
 {
@@ -98,6 +102,31 @@ namespace Luke.Net.Features.Documents.Services
                 if (indexReader != null)
                     indexReader.Close();
             }
+        }
+
+        public IEnumerable<DocumentInfo> SearchDocumentsFor(TermToInspect termToInspect)
+        {
+            // ToDo: a bit clean up is required here.
+            // It has been implementely very quickly and with a lot of deprecated methods
+            IndexSearcher searcher = null;
+            try
+            {
+                searcher = new IndexSearcher(_openIndexModel.Directory, _openIndexModel.ReadOnly);
+                var queryParser = new QueryParser(termToInspect.FieldName, new StandardAnalyzer());
+                var query = queryParser.Parse(termToInspect.TermName);
+                var hits = searcher.Search(query);
+                for (var i = 0; i < hits.Length(); i++)
+                {
+                    yield return GetDocumentInfo(hits.Id(i));
+                }
+            }
+            finally
+            {
+                if(searcher!= null)
+                    searcher.Close();
+            }
+
+            yield break;
         }
     }
 }

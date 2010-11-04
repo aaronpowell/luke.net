@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Luke.Net.Models
+namespace Luke.Net.Features.Overview
 {
     public class FieldByTermInfo
     {
