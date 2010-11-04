@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Data;
@@ -69,6 +70,8 @@ namespace Luke.Net.Features.Overview
             else
                 _fields = _indexOverviewService.GetFieldsAndTerms();
 
+            NumberOfTopTerms = Math.Min(NumberOfTopTerms, TermCount);
+
             UpdateTermsView();
             RaisePropertyChanged(() => TermCount);
         }
@@ -94,8 +97,9 @@ namespace Luke.Net.Features.Overview
             set
             {
                 _numberOfTopTerms = value;
+
+                UpdateTermsView();
                 RaisePropertyChanged(() => NumberOfTopTerms);
-                RaisePropertyChanged(() => Terms);
             }
         }
 

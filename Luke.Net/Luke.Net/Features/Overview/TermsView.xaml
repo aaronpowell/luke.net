@@ -15,8 +15,14 @@
                 <RotateTransform Angle="90" />
             </DockPanel.LayoutTransform>
 
-            <Label DockPanel.Dock="Left">Terms' Top</Label>
-            <Label DockPanel.Dock="Left" Content="{Binding ElementName=TopTermSlider, Path=Value, Mode=OneWay}" />
+            <TextBlock DockPanel.Dock="Left">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="Top {0} terms out of {1}">
+                        <Binding ElementName="TopTermSlider" Path="Value" />
+                        <Binding Path="TermCount" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
 
             <Button DockPanel.Dock="Right" Click="Button_Click">Apply</Button>
 
