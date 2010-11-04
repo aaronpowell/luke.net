@@ -11,13 +11,11 @@
                     <ValueConverters:PercentageValueConverter x:Key="PercentageConverter" />
                     <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
                     <ValueConverters:BooleanToWordValueConverter x:Key="BoolToWord" />
-
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
-                    </Style>
+                          
                     <Style x:Key="SmallFont" TargetType="TextBlock">
                         <Setter Property="FontSize" Value="10" />
                     </Style>
+
                     <Style x:Key="Emphasise" TargetType="TextBlock">
                         <Setter Property="FontWeight" Value="Bold" />
                     </Style>
