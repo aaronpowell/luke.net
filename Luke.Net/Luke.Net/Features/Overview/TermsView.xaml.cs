@@ -25,5 +25,13 @@ namespace Luke.Net.Features.Overview
         {
             TopTermSlider.GetBindingExpression(Slider.ValueProperty).UpdateSource();
         }
+
+        private void termsView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if(InspectDocumentsButton.IsEnabled)
+            {
+                InspectDocumentsButton.Command.Execute(null);
+            }
+        }
     }
 }
