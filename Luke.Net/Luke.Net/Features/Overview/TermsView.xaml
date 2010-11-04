@@ -44,6 +44,7 @@
                 Content="Search" 
                 IsEnabled="{Binding ElementName=termsView, Path=SelectedItem, Converter={StaticResource notNullConverter}}" />
             <Button 
+                x:Name="InspectDocumentsButton"
                 Content="Inspect Documents" 
                 Command="{Binding InspectDocuments}" />
         </StackPanel>
@@ -54,7 +55,8 @@
                 IsReadOnly="True"
                 ItemsSource="{Binding Terms}" 
                 x:Name="termsView" 
-                LoadingRow="TermsViewLoadingRow">
+                LoadingRow="TermsViewLoadingRow" 
+                MouseDoubleClick="termsView_MouseDoubleClick">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Rank}" Header="Rank" />
                     <DataGridTextColumn Binding="{Binding Frequency}" Header="Frequency" />

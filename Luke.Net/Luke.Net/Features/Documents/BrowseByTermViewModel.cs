@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
+using System.Windows.Input;
 using Luke.Net.Features.Documents.Services;
+using Luke.Net.Infrastructure;
 using Luke.Net.Models;
 using Luke.Net.Models.Events;
 using Microsoft.Practices.Prism.Events;
@@ -24,10 +27,30 @@ namespace Luke.Net.Features.Documents
 
             _eventAggregator.GetEvent<InspectDocumentsForTermEvent>().Subscribe(InspectDocuments);
 
+            InspectDocumentCommand = new RelayCommand(InspectDocument, CanInspectDocument);
             _fields = new ObservableCollection<string>(_documentService.GetFields());
             Fields = new CollectionView(_fields);
             RaisePropertyChanged(() => Fields);
         }
+
+        private void InspectDocument()
+        {
+            var term = new TermToInspect {FieldName = (string) Fields.CurrentItem, TermName = TermToInspect};
+            InspectDocuments(term);
+        }
+
+        private bool CanInspectDocument()
+        {
+            if(string.IsNullOrEmpty(TermToInspect))
+                return false;
+
+            if(Fields.CurrentItem==null)
+                return false;
+
+            return true;
+        }
+
+        public ICommand InspectDocumentCommand { get; private set; }
 
         private void InspectDocuments(TermToInspect termToInspect)
         {
