@@ -4,6 +4,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using Luke.Net.Features.Overview.Services;
 using Luke.Net.Infrastructure;
+using Luke.Net.Models;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 

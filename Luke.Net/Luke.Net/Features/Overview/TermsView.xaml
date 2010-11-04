@@ -33,15 +33,18 @@
             </Slider>
         </DockPanel>
 
-        <Menu DockPanel.Dock="Top" x:Name="TermMenu" IsEnabled="{Binding ElementName=termsView, Path=SelectedItem, Converter={StaticResource notNullConverter}}">
-            <MenuItem Header="Term">
-                <MenuItem Header="Search" />
-                <MenuItem Header="Inspect Documents" />
-            </MenuItem>
-        </Menu>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
+            <Button 
+                Content="Search" 
+                IsEnabled="{Binding ElementName=termsView, Path=SelectedItem, Converter={StaticResource notNullConverter}}" />
+            <Button 
+                Content="Inspect Documents" 
+                Command="{Binding InspectDocuments}" />
+        </StackPanel>
 
         <Grid>
-            <DataGrid 
+            <DataGrid
+                AutoGenerateColumns="False"
                 IsReadOnly="True"
                 ItemsSource="{Binding Terms}" 
                 x:Name="termsView" 
