@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows.Input;
-using Luke.Net.Features.Documents.Services;
+﻿using Luke.Net.Features.Documents.Services;
 using Luke.Net.Infrastructure;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
@@ -16,7 +14,7 @@ namespace Luke.Net.Features.Documents
         {
             _eventAggregator = eventAggregator;
             _documentService = documentService;
-            _count = _documentService.GetNumberOfDocuments();
+            Count = _documentService.GetNumberOfDocuments();
             BrowseDocument = new RelayCommand<int>(ExecuteBrowseDocument);
         }
 
