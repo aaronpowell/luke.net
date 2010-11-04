@@ -23,7 +23,7 @@ namespace Luke.Net.Features
             _container.Resolve<DocumentsModule>().Initialize();
 
             _regionManager.RegisterViewWithRegion(
-                Regions.IndexRegion,
+                Regions.LuceneShellRegion,
                 () => _container.Resolve<LuceneShell>());
         }
     }

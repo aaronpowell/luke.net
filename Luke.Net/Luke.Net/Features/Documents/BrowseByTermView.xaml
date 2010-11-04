@@ -2,11 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:ValueConverters="clr-namespace:Luke.Net.Infrastructure.ValueConverters" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
     
     <UserControl.Resources>
+        <ValueConverters:AdditionValueConverter x:Key="AddConverter" />
         <Style TargetType="Button">
             <Setter Property="Margin" Value="2,2" />
         </Style>
@@ -26,8 +26,6 @@
                 <Button DockPanel.Dock="Right">Next</Button>
                 <TextBox Text="{Binding TermToInspect}" />
             </DockPanel>
-
-            <Label FontWeight="Bold" Content="{Binding ResultCount, StringFormat=Browse documents with this term ({0} documents)}" />
 
             <Separator Margin="0,5" />
 
@@ -49,12 +47,31 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="0">Document 1 of 2</Label>
+                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="Browse document {0} of {1} found documents">
+                                    <Binding ElementName="DocumentToBrowseSlider" Path="Value" Converter="{StaticResource AddConverter}" ConverterParameter="1" />
+                                    <Binding Path="ResultCount" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
 
-                        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
-                            <Button>First Doc</Button>
-                            <Button>Next Doc</Button>
-                        </StackPanel>
+                        <DockPanel  Grid.Column="1" Grid.Row="0">
+                            <Slider x:Name="DocumentToBrowseSlider"
+                                    IsSnapToTickEnabled="True"
+                                    TickPlacement="BottomRight"
+                                    TickFrequency="1"
+                                    DockPanel.Dock="Left"
+                                    Margin="5,0"
+                                    Minimum="0"
+                                    Maximum="{Binding 
+                                                Path=ResultCount, 
+                                                Mode=OneWay, 
+                                                Converter={StaticResource AddConverter}, 
+                                                ConverterParameter=-1}"
+                                    Value="{Binding Path=IndexOfDocumentToBrowse}">
+                            </Slider>
+                        </DockPanel>
 
                         <Label Grid.Column="0" Grid.Row="1">Term freq in this doc: 5</Label>
                         <Button Grid.Column="1" Grid.Row="1">Show Positions</Button>

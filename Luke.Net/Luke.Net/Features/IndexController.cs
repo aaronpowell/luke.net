@@ -1,5 +1,8 @@
-﻿using Luke.Net.Features.OpenIndex;
+﻿using System;
+using System.Linq;
+using Luke.Net.Features.OpenIndex;
 using Luke.Net.Features.Overview;
+using Luke.Net.Models;
 using Luke.Net.Models.Events;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
@@ -22,6 +25,15 @@ namespace Luke.Net.Features
             _regionManager = regionManager;
             _container = container;
             eventAggregator.GetEvent<IndexChangedEvent>().Subscribe(UpdateIndex);
+            eventAggregator.GetEvent<InspectDocumentsForTermEvent>().Subscribe(ActivateDocumentsView);
+        }
+
+        private void ActivateDocumentsView(TermToInspect obj)
+        {
+            // ToDo: This is not very nice, I know. I will have to find a better way to activate the tab
+            var documentsRegion = _regionManager.Regions[Regions.LuceneShellRegion];
+            var view = documentsRegion.Views.OfType<LuceneShell>().Single();
+            view.DocumentsTab.IsSelected = true;
         }
 
         private void UpdateIndex(OpenIndexModel newIndex)
