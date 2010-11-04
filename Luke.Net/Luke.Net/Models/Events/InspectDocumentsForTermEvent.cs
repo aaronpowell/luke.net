@@ -2,7 +2,7 @@
 
 namespace Luke.Net.Models.Events
 {
-    internal class InspectDocumentsForTermEvent : CompositePresentationEvent<TermInfo>
+    internal class InspectDocumentsForTermEvent : CompositePresentationEvent<TermToInspect>
     {
     }
 }

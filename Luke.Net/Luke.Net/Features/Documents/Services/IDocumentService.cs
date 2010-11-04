@@ -9,5 +9,6 @@ namespace Luke.Net.Features.Documents.Services
         DocumentInfo GetDocumentInfo(int documentNo);
         int GetNumberOfDocuments();
         IEnumerable<string> GetFields();
+        IEnumerable<DocumentInfo> SearchDocumentsFor(TermToInspect termToInspect);
     }
 }

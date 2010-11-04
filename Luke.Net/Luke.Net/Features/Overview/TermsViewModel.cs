@@ -42,7 +42,8 @@ namespace Luke.Net.Features.Overview
         private void ExecuteInspectDocuments()
         {
             var selectedTerm = (TermInfo)Terms.CurrentItem;
-            _eventAggregator.GetEvent<InspectDocumentsForTermEvent>().Publish(selectedTerm);
+            var termToInspect = new TermToInspect{FieldName = selectedTerm.Field.Field, TermName = selectedTerm.Term};
+            _eventAggregator.GetEvent<InspectDocumentsForTermEvent>().Publish(termToInspect);
         }
 
         private bool CanInspectDocuments()

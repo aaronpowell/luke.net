@@ -24,7 +24,7 @@
                 <Label DockPanel.Dock="Left" VerticalContentAlignment="Center">Term: </Label>
                 <ComboBox DockPanel.Dock="Left" ItemsSource="{Binding Fields}" MinWidth="70" />
                 <Button DockPanel.Dock="Right">Next</Button>
-                <TextBox></TextBox>
+                <TextBox Text="{Binding TermToInspect}" />
             </DockPanel>
 
             <Label FontWeight="Bold" Content="{Binding ResultCount, StringFormat=Browse documents with this term ({0} documents)}" />
