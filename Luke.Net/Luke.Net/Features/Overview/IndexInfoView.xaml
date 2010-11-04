@@ -21,27 +21,27 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Column="0" Grid.Row="0" Text="Index Path:" />
-            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding IndexPath}" Style="{StaticResource Emphasise}" />
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding IndexInfo.IndexPath}" Style="{StaticResource Emphasise}" />
 
             <TextBlock Grid.Column="0" Grid.Row="1" Text="Number of Fields:" />
-            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding FieldCount}" Style="{StaticResource Emphasise}" />
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding IndexInfo.FieldCount}" Style="{StaticResource Emphasise}" />
 
             <TextBlock Grid.Column="0" Grid.Row="2" Text="Number of Documents:" />
-            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding DocumentCount}" Style="{StaticResource Emphasise}" />
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding IndexInfo.DocumentCount}" Style="{StaticResource Emphasise}" />
 
             <TextBlock Grid.Column="0" Grid.Row="3" Text="Number of Terms:" />
-            <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding TermCount}" Style="{StaticResource Emphasise}" />
+            <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding IndexInfo.TermCount}" Style="{StaticResource Emphasise}" />
 
             <TextBlock Grid.Column="0" Grid.Row="4" Text="Has Deletions? / Is Optimized?" />
             <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
-                <TextBlock Text="{Binding HasDeletions, Converter={StaticResource BoolToWord}}" Style="{StaticResource Emphasise}" Margin="0,0,5,0" />
-                <TextBlock Text="{Binding DeletionCount, StringFormat={}(0)}" Visibility="{Binding HasDeletions, Converter={StaticResource BoolToVisibility}}" Style="{StaticResource Emphasise}" Margin="0,0,5,0" />
+                <TextBlock Text="{Binding IndexInfo.HasDeletions, Converter={StaticResource BoolToWord}}" Style="{StaticResource Emphasise}" Margin="0,0,5,0" />
+                <TextBlock Text="{Binding IndexInfo.DeletionCount, StringFormat={}(0)}" Visibility="{Binding IndexInfo.HasDeletions, Converter={StaticResource BoolToVisibility}}" Style="{StaticResource Emphasise}" Margin="0,0,5,0" />
                 <TextBlock Text="/" Style="{StaticResource Emphasise}" Margin="0,0,5,0" />
-                <TextBlock Text="{Binding Optimized, Converter={StaticResource BoolToWord}}" Style="{StaticResource Emphasise}" />
+                <TextBlock Text="{Binding IndexInfo.Optimized, Converter={StaticResource BoolToWord}}" Style="{StaticResource Emphasise}" />
             </StackPanel>
 
             <TextBlock Grid.Column="0" Grid.Row="5" Text="Last Modified:" />
-            <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding LastModified}" Style="{StaticResource Emphasise}" />
+            <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding IndexInfo.LastModified}" Style="{StaticResource Emphasise}" />
 
         </Grid>
         
@@ -63,13 +63,13 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Column="0" Grid.Row="0" Text="Index Version:" Style="{StaticResource SmallFont}" />
-            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Version}" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding IndexInfo.Version}" Style="{StaticResource SmallFont}" />
 
             <TextBlock Grid.Column="0" Grid.Row="1" Text="Index Format:" Style="{StaticResource SmallFont}" />
-            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding IndexDetails.GenericName}" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding IndexInfo.IndexDetails.GenericName}" Style="{StaticResource SmallFont}" />
 
             <TextBlock Grid.Column="0" Grid.Row="2" Text="Index Features:" Style="{StaticResource SmallFont}" />
-            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding IndexDetails.Capabilities}" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding IndexInfo.IndexDetails.Capabilities}" Style="{StaticResource SmallFont}" />
 
             <TextBlock Grid.Column="0" Grid.Row="3" Text="TermInfos index divisor:" Style="{StaticResource SmallFont}" />
             <TextBlock Grid.Column="1" Grid.Row="3" Text="TermInfosDivisor" Style="{StaticResource SmallFont}" />
