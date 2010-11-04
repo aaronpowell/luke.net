@@ -1,4 +1,4 @@
-﻿namespace Luke.Net.Features.Overview
+﻿namespace Luke.Net.Models
 {
     public class TermInfo
     {
