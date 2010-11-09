@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="Features\LukeModule.cs" />
     <Compile Include="Features\Overview\IndexInfoViewModel.cs" />
+    <Compile Include="Infrastructure\Controls\ProgressContainer.cs" />
     <Compile Include="Models\Events\InspectDocumentsForTermEvent.cs" />
     <Compile Include="Features\Overview\Services\IIndexOverviewService.cs" />
     <Compile Include="Features\Overview\Services\IndexOverviewService.cs" />
@@ -191,7 +192,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\ExpressionDark.xaml">
+    <Page Include="Themes\ExpressionDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -222,6 +227,9 @@
   </ItemGroup>
   <ItemGroup>
     <SplashScreen Include="SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
