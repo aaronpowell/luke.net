@@ -5,7 +5,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources\ExpressionDark.xaml" />
+                <ResourceDictionary Source="Themes\ExpressionDark.xaml" />
                 
                 <ResourceDictionary>
                     <ValueConverters:PercentageValueConverter x:Key="PercentageConverter" />

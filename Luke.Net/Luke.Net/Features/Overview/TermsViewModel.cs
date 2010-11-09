@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using Luke.Net.Features.Overview.Services;
@@ -54,11 +55,31 @@ namespace Luke.Net.Features.Overview
 
         private void LoadModel()
         {
-            _fields = _indexOverviewService.GetFieldsAndTerms();
+            IsLoading = true;
 
-            UpdateTermsView();
+            var ui = TaskScheduler.FromCurrentSynchronizationContext();
 
-            RaisePropertyChanged(() => TermCount);
+            Task.Factory
+                .StartNew(() => _indexOverviewService.GetFieldsAndTerms())
+                .ContinueWith(t =>
+                                  {
+                                      _fields = t.Result;
+                                      UpdateTermsView();
+                                      RaisePropertyChanged(() => TermCount);
+                                      IsLoading = false;
+                                  }, ui);
+        }
+
+        private bool _isLoading;
+
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                _isLoading = value;
+                RaisePropertyChanged(()=>IsLoading);
+            }
         }
 
         public ICommand FilterTerms { get; set; }
