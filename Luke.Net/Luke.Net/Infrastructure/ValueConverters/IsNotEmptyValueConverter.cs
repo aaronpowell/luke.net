@@ -11,10 +11,14 @@ namespace Luke.Net.Infrastructure.ValueConverters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var enumerable = value as IEnumerable<object>;
-            if (enumerable == null)
-                return false;
+            if (enumerable != null)
+                return enumerable.Any();
 
-            return enumerable.Any();
+            var stringValue = value as string;
+            if (stringValue != null)
+                return stringValue.Length > 0;
+
+            return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
