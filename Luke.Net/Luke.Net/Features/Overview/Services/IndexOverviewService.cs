@@ -81,7 +81,6 @@ namespace Luke.Net.Features.Overview.Services
 
                 while (terms.Next())
                 {
-                    Thread.Sleep(2);
                     var term = terms.Term();
                     yield return new TermInfo { Term = term.Text(), Field = term.Field(), Frequency = terms.DocFreq() };
                 }

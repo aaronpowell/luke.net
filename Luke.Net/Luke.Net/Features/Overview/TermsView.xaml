@@ -10,7 +10,7 @@
         <ValueConverters:NotNullValueConverter x:Key="notNullConverter" />
     </UserControl.Resources>
 
-    <Controls:ProgressContainer IsBusy="{Binding IsLoading}">
+    <Controls:ProgressContainer IsBusy="{Binding IsLoading}" ProgressText="Loading terms from index. Please wait ...">
         <DockPanel ClipToBounds="False">
             <DockPanel DockPanel.Dock="Left" Margin="10, 0">
                 <DockPanel.LayoutTransform>
