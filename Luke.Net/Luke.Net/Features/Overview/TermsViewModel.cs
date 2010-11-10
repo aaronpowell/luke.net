@@ -66,18 +66,11 @@ namespace Luke.Net.Features.Overview
                             pipeline.Add(term);
 
                         pipeline.CompleteAdding();
-                    });
-
-            Task.Factory
-                .StartNew(
-                    () =>
-                        {
-                            foreach (var term in pipeline.GetConsumingEnumerable())
-                                _terms.Add(term);
-                        })
+                    })
                 .ContinueWith(
                     t =>
                         {
+                            _terms.AddRange(pipeline.GetConsumingEnumerable());
                             UpdateTermsView();
                             RaisePropertyChanged(() => TermCount);
                             IsLoading = false;
@@ -118,18 +111,15 @@ namespace Luke.Net.Features.Overview
 
         void UpdateTermsView()
         {
-            lock (_termsCollection)
-            {
-                _termsCollection.Clear();
+            _termsCollection.Clear();
 
-                var terms = from term in _terms
-                            where _fieldsFilter == null || _fieldsFilter.Any(f => f.Field == term.Field)
-                            orderby term.Frequency descending
-                            select term;
+            var terms = from term in _terms
+                        where _fieldsFilter == null || _fieldsFilter.Any(f => f.Field == term.Field)
+                        orderby term.Frequency descending
+                        select term;
 
-                foreach (var term in terms.Take(NumberOfTopTerms))
-                    _termsCollection.Add(term);
-            }
+            foreach (var term in terms.Take(NumberOfTopTerms))
+                _termsCollection.Add(term);
         }
 
         private int _numberOfTopTerms = 50; // the default number of items to show
