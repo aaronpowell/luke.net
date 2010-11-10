@@ -37,13 +37,14 @@
                                 <ContentControl VerticalAlignment="Center" Margin="10, 0">
                                     <StackPanel>
                                         <TextBlock 
-                                                VerticalAlignment="Center"
-                                                Text="{Binding ProgressText, RelativeSource={RelativeSource AncestorType=Controls:ProgressContainer}}" />
+                                            VerticalAlignment="Center"
+                                            Text="{Binding ProgressText, RelativeSource={RelativeSource AncestorType=Controls:ProgressContainer}}" />
                                         <ProgressBar
-                                                VerticalAlignment="Center"
-                                                MinHeight="15"
-                                                IsIndeterminate="{Binding IsIndeterminate, RelativeSource={RelativeSource AncestorType=Controls:ProgressContainer}}"
-                                                Value="{Binding ProgressValue, RelativeSource={RelativeSource AncestorType=Controls:ProgressContainer}}"/>
+                                            Style="{x:Null}"
+                                            VerticalAlignment="Center"
+                                            MinHeight="15"
+                                            IsIndeterminate="{Binding IsIndeterminate, RelativeSource={RelativeSource AncestorType=Controls:ProgressContainer}}"
+                                            Value="{Binding ProgressValue, RelativeSource={RelativeSource AncestorType=Controls:ProgressContainer}}"/>
                                     </StackPanel>
                                 </ContentControl>
                             </Border>

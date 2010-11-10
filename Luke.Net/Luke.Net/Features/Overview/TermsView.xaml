@@ -62,7 +62,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Rank}" Header="Rank" />
                         <DataGridTextColumn Binding="{Binding Frequency}" Header="Frequency" />
-                        <DataGridTextColumn Binding="{Binding Field.Field}" Header="Field" />
+                        <DataGridTextColumn Binding="{Binding Field}" Header="Field" />
                         <DataGridTextColumn Binding="{Binding Term}" Header="Text" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>

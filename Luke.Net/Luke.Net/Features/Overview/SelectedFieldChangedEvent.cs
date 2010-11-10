@@ -4,7 +4,7 @@ using Microsoft.Practices.Prism.Events;
 
 namespace Luke.Net.Features.Overview
 {
-    internal class SelectedFieldChangedEvent : CompositePresentationEvent<IEnumerable<FieldByTermInfo>>
+    internal class SelectedFieldChangedEvent : CompositePresentationEvent<IEnumerable<FieldInfo>>
     {
     }
 }

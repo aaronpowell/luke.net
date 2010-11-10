@@ -1,22 +1,40 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Threading;
 using Lucene.Net.Index;
 using Luke.Net.Features.OpenIndex;
 using Luke.Net.Infrastructure.Utilities;
-using Luke.Net.Models;
 
 namespace Luke.Net.Features.Overview.Services
 {
     class IndexOverviewService : IIndexOverviewService
     {
         private readonly OpenIndexModel _openIndexModel;
-        private List<FieldByTermInfo> _fields;
 
         public IndexOverviewService()
         {
             // ToDo: i should change this soon
             _openIndexModel = App.OpenIndexModel;
+        }
+
+        public IEnumerable<FieldInfo> GetFields()
+        {
+            var directory = _openIndexModel.Directory;
+            IndexReader indexReader = null;
+
+            try
+            {
+                indexReader = IndexReader.Open(directory, true); // ToDo should i open this only once
+                foreach (var fieldName in indexReader.GetFieldNames(IndexReader.FieldOption.ALL))
+                    yield return new FieldInfo {Field = fieldName };
+            }
+            finally
+            {
+                if (indexReader != null)
+                    indexReader.Close();
+            }
+
+            yield break;
         }
 
         public IndexInfo GetIndexInfo()
@@ -40,7 +58,7 @@ namespace Luke.Net.Features.Overview.Services
                                DeletionCount = indexReader.NumDeletedDocs(),
                                Optimized = indexReader.IsOptimized(),
                                IndexPath = Path.GetFullPath(_openIndexModel.Path),
-                               TermCount = GetFieldsAndTerms().SelectMany(f =>f.Terms).Count()
+                               TermCount = 0 // GetFieldsAndTerms().SelectMany(f =>f.Terms).Count()
                            };
             }
             finally
@@ -50,59 +68,34 @@ namespace Luke.Net.Features.Overview.Services
             }
         }        
 
-        public IEnumerable<FieldByTermInfo> GetFieldsAndTerms()
+        public IEnumerable<TermInfo> GetTerms()
         {
-            if (_fields != null)
-                return _fields;
-
-            _fields = new List<FieldByTermInfo>();
-
             var directory = _openIndexModel.Directory;
             IndexReader indexReader = null;
+            TermEnum terms = null;
 
             try
             {
                 indexReader = IndexReader.Open(directory, true); // ToDo should i open this only once
-
-                var terms = indexReader.Terms();
-                var termCount = 0;
-
-                _fields.Clear();
+                terms = indexReader.Terms();
 
                 while (terms.Next())
                 {
+                    Thread.Sleep(2);
                     var term = terms.Term();
-                    var field = _fields.SingleOrDefault(x => x.Field == term.Field());
-
-                    if (field != null)
-                    {
-                        field.Count++;
-                    }
-                    else
-                    {
-                        field = new FieldByTermInfo { Count = 1, Field = term.Field() };
-                        _fields.Add(field);
-                    }
-
-                    var termInfo = new TermInfo { Term = term.Text(), Field = field, Frequency = terms.DocFreq() };
-                    field.AddTerm(termInfo);
-
-                    termCount++;
+                    yield return new TermInfo { Term = term.Text(), Field = term.Field(), Frequency = terms.DocFreq() };
                 }
-
-                _fields.Select(x =>
-                                   {
-                                       x.Frequency = ((double)x.Count * 100) / termCount;
-                                       return x;
-                                   });
             }
             finally
             {
                 if (indexReader != null)
                     indexReader.Close();
+
+                if (terms != null)
+                    terms.Close();
             }
 
-            return _fields;
+            yield break;
         }
     }
 }

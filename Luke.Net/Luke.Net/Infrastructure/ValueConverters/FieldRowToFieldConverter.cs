@@ -13,7 +13,7 @@ namespace Luke.Net.Infrastructure.ValueConverters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var grid = (DataGrid) value;
-            var selectedFields = grid.SelectedItems.Cast<FieldByTermInfo>();
+            var selectedFields = grid.SelectedItems.Cast<FieldInfo>();
             return selectedFields;
         }
 

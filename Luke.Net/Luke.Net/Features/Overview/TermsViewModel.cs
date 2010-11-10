@@ -9,7 +9,6 @@ using Luke.Net.Features.Overview.Services;
 using Luke.Net.Infrastructure;
 using Luke.Net.Models;
 using Luke.Net.Models.Events;
-using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 
@@ -19,22 +18,20 @@ namespace Luke.Net.Features.Overview
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IIndexOverviewService _indexOverviewService;
-        private IEnumerable<FieldByTermInfo> _fields;
-        private readonly ObservableCollection<TermInfo> _terms;
+        private List<TermInfo> _terms;
+        private readonly ObservableCollection<TermInfo> _termsCollection;
+        private IEnumerable<FieldInfo> _fieldsFilter;
 
         public TermsViewModel(IEventAggregator eventAggregator, IIndexOverviewService indexOverviewService)
         {
             _eventAggregator = eventAggregator;
             _indexOverviewService = indexOverviewService;
-
-            // just an empty array till an index is provided
-            _fields = new FieldByTermInfo[] {};
-
             _eventAggregator.GetEvent<SelectedFieldChangedEvent>().Subscribe(FilterTermsExecuted);
-            FilterTerms = new RelayCommand<IEnumerable<FieldByTermInfo>>(FilterTermsExecuted);
 
-            _terms = new ObservableCollection<TermInfo>();
-            Terms = new ListCollectionView(_terms);
+            _terms = new List<TermInfo>();
+            FilterTerms = new RelayCommand<IEnumerable<FieldInfo>>(FilterTermsExecuted);
+            _termsCollection = new ObservableCollection<TermInfo>();
+            Terms = new ListCollectionView(_termsCollection);
 
             InspectDocuments = new RelayCommand(ExecuteInspectDocuments, CanInspectDocuments);
 
@@ -44,7 +41,7 @@ namespace Luke.Net.Features.Overview
         private void ExecuteInspectDocuments()
         {
             var selectedTerm = (TermInfo)Terms.CurrentItem;
-            var termToInspect = new TermToInspect{FieldName = selectedTerm.Field.Field, TermName = selectedTerm.Term};
+            var termToInspect = new TermToInspect{FieldName = selectedTerm.Field, TermName = selectedTerm.Term};
             _eventAggregator.GetEvent<InspectDocumentsForTermEvent>().Publish(termToInspect);
         }
 
@@ -60,10 +57,10 @@ namespace Luke.Net.Features.Overview
             var ui = TaskScheduler.FromCurrentSynchronizationContext();
 
             Task.Factory
-                .StartNew(() => _indexOverviewService.GetFieldsAndTerms())
+                .StartNew(() => _indexOverviewService.GetTerms())
                 .ContinueWith(t =>
                                   {
-                                      _fields = t.Result;
+                                      _terms.AddRange(t.Result);
                                       UpdateTermsView();
                                       RaisePropertyChanged(() => TermCount);
                                       IsLoading = false;
@@ -84,12 +81,12 @@ namespace Luke.Net.Features.Overview
 
         public ICommand FilterTerms { get; set; }
 
-        void FilterTermsExecuted(IEnumerable<FieldByTermInfo> fields)
+        void FilterTermsExecuted(IEnumerable<FieldInfo> fields)
         {
             if (fields != null && fields.Any())
-                _fields = fields;
+                _fieldsFilter = fields;
             else
-                _fields = _indexOverviewService.GetFieldsAndTerms();
+                _fieldsFilter = null;
 
             NumberOfTopTerms = Math.Min(NumberOfTopTerms, TermCount);
 
@@ -99,13 +96,15 @@ namespace Luke.Net.Features.Overview
 
         void UpdateTermsView()
         {
-            _terms.Clear();
+            _termsCollection.Clear();
 
-            _fields
-                .SelectMany(f => f.Terms)
-                .OrderByDescending(t => t.Frequency)
-                .Take(NumberOfTopTerms)
-                .ForEach(t => _terms.Add(t));
+            var terms = from term in _terms
+                        where _fieldsFilter == null || _fieldsFilter.Any(f => f.Field == term.Field)
+                        orderby term.Frequency descending 
+                        select term;
+            
+            foreach(var term in terms.Take(NumberOfTopTerms))
+                _termsCollection.Add(term);
 
             // notify that terms view has changed. 
             RaisePropertyChanged(() => Terms);
@@ -130,7 +129,7 @@ namespace Luke.Net.Features.Overview
         {
             get
             {
-                return _fields.SelectMany(f => f.Terms).Count();
+                return _terms.Count();
             }
         }
 
