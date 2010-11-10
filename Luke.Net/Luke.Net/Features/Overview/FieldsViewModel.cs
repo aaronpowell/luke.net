@@ -14,13 +14,13 @@ namespace Luke.Net.Features.Overview
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IIndexOverviewService _indexOverviewService;
-        private readonly List<FieldByTermInfo> _fields = new List<FieldByTermInfo>();
+        private readonly List<FieldInfo> _fields = new List<FieldInfo>();
 
         public FieldsViewModel(IEventAggregator eventAggregator, IIndexOverviewService indexOverviewService)
         {
             _eventAggregator = eventAggregator;
             _indexOverviewService = indexOverviewService;
-            InspectFields = new RelayCommand<IEnumerable<FieldByTermInfo>>(InspectFieldsExecuted);
+            InspectFields = new RelayCommand<IEnumerable<FieldInfo>>(InspectFieldsExecuted);
             Fields = new ListCollectionView(_fields);
 
             LoadModel();
@@ -29,13 +29,13 @@ namespace Luke.Net.Features.Overview
         private void LoadModel()
         {
             _fields.Clear();
-            _fields.AddRange(_indexOverviewService.GetFieldsAndTerms());
+            _fields.AddRange(_indexOverviewService.GetFields());
             Fields.Refresh();
         }
 
         public ICommand InspectFields { get; set; }
 
-        void InspectFieldsExecuted(IEnumerable<FieldByTermInfo> fields)
+        void InspectFieldsExecuted(IEnumerable<FieldInfo> fields)
         {
         }
 

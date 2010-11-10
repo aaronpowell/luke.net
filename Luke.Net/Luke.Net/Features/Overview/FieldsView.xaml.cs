@@ -24,7 +24,7 @@ namespace Luke.Net.Features.Overview
         private void fieldsView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // ToDo: This whole thing should be moved into the view model
-            var selectedFields = fieldsView.SelectedItems.Cast<FieldByTermInfo>();
+            var selectedFields = fieldsView.SelectedItems.Cast<FieldInfo>();
             _eventAggregator.GetEvent<SelectedFieldChangedEvent>().Publish(selectedFields);
         }
     }
