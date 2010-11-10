@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -56,15 +57,14 @@ namespace Luke.Net.Features.Overview
 
             var ui = TaskScheduler.FromCurrentSynchronizationContext();
 
-            Task.Factory
-                .StartNew(() => _indexOverviewService.GetTerms())
-                .ContinueWith(t =>
+            var task = Task.Factory.StartNew(() => _indexOverviewService.GetTerms().ToList()); // the enumerable has to be executed here or task will "complete" instantly
+            task.ContinueWith(t =>
                                   {
-                                      _terms.AddRange(t.Result);
+                                      _terms = t.Result;
                                       UpdateTermsView();
                                       RaisePropertyChanged(() => TermCount);
                                       IsLoading = false;
-                                  }, ui);
+                                  }, CancellationToken.None, TaskContinuationOptions.OnlyOnRanToCompletion, ui);
         }
 
         private bool _isLoading;

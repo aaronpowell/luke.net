@@ -36,8 +36,11 @@
 
                                 <ContentControl VerticalAlignment="Center" Margin="10, 0">
                                     <StackPanel>
+                                        <!-- ToDo: I know this is not a good idea to specify the forground here. I should change it later.-->
                                         <TextBlock 
+                                            Foreground="White" 
                                             VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"
                                             Text="{Binding ProgressText, RelativeSource={RelativeSource AncestorType=Controls:ProgressContainer}}" />
                                         <ProgressBar
                                             Style="{x:Null}"
