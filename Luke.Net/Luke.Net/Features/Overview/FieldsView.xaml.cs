@@ -1,8 +1,5 @@
 ﻿using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
-using Luke.Net.Models;
-using Luke.Net.Models.Events;
 using Microsoft.Practices.Prism.Events;
 
 namespace Luke.Net.Features.Overview

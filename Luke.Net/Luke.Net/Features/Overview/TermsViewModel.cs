@@ -64,6 +64,8 @@ namespace Luke.Net.Features.Overview
                                       UpdateTermsView();
                                       RaisePropertyChanged(() => TermCount);
                                       IsLoading = false;
+                                      // let others know that terms have been loaded
+                                      _eventAggregator.GetEvent<TermsLoadedEvent>().Publish(_terms);
                                   }, CancellationToken.None, TaskContinuationOptions.OnlyOnRanToCompletion, ui);
         }
 

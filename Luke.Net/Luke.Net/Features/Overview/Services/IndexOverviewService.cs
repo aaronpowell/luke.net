@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Threading;
 using Lucene.Net.Index;
 using Luke.Net.Features.OpenIndex;
 using Luke.Net.Infrastructure.Utilities;
