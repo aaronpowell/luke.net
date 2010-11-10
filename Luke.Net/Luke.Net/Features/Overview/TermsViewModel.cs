@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -56,17 +57,36 @@ namespace Luke.Net.Features.Overview
             IsLoading = true;
 
             var ui = TaskScheduler.FromCurrentSynchronizationContext();
+            var pipeline = new BlockingCollection<TermInfo>();
 
-            var task = Task.Factory.StartNew(() => _indexOverviewService.GetTerms().ToList()); // the enumerable has to be executed here or task will "complete" instantly
-            task.ContinueWith(t =>
-                                  {
-                                      _terms = t.Result;
-                                      UpdateTermsView();
-                                      RaisePropertyChanged(() => TermCount);
-                                      IsLoading = false;
-                                      // let others know that terms have been loaded
-                                      _eventAggregator.GetEvent<TermsLoadedEvent>().Publish(_terms);
-                                  }, CancellationToken.None, TaskContinuationOptions.OnlyOnRanToCompletion, ui);
+            Task.Factory.StartNew(
+                () =>
+                    {
+                        foreach (var term in _indexOverviewService.GetTerms())
+                            pipeline.Add(term);
+
+                        pipeline.CompleteAdding();
+                    });
+
+            Task.Factory
+                .StartNew(
+                    () =>
+                        {
+                            foreach (var term in pipeline.GetConsumingEnumerable())
+                                _terms.Add(term);
+                        })
+                .ContinueWith(
+                    t =>
+                        {
+                            UpdateTermsView();
+                            RaisePropertyChanged(() => TermCount);
+                            IsLoading = false;
+                            // let others know that terms have been loaded
+                            _eventAggregator.GetEvent<TermsLoadedEvent>().Publish(_terms);
+                        },
+                    CancellationToken.None,
+                    TaskContinuationOptions.OnlyOnRanToCompletion,
+                    ui);
         }
 
         private bool _isLoading;
@@ -98,18 +118,18 @@ namespace Luke.Net.Features.Overview
 
         void UpdateTermsView()
         {
-            _termsCollection.Clear();
+            lock (_termsCollection)
+            {
+                _termsCollection.Clear();
 
-            var terms = from term in _terms
-                        where _fieldsFilter == null || _fieldsFilter.Any(f => f.Field == term.Field)
-                        orderby term.Frequency descending 
-                        select term;
-            
-            foreach(var term in terms.Take(NumberOfTopTerms))
-                _termsCollection.Add(term);
+                var terms = from term in _terms
+                            where _fieldsFilter == null || _fieldsFilter.Any(f => f.Field == term.Field)
+                            orderby term.Frequency descending
+                            select term;
 
-            // notify that terms view has changed. 
-            RaisePropertyChanged(() => Terms);
+                foreach (var term in terms.Take(NumberOfTopTerms))
+                    _termsCollection.Add(term);
+            }
         }
 
         private int _numberOfTopTerms = 50; // the default number of items to show

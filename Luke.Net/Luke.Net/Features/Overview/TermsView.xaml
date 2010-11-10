@@ -10,63 +10,67 @@
         <ValueConverters:NotNullValueConverter x:Key="notNullConverter" />
     </UserControl.Resources>
 
-    <Controls:ProgressContainer IsBusy="{Binding IsLoading}" ProgressText="Loading terms from index. Please wait ...">
-        <DockPanel ClipToBounds="False">
-            <DockPanel DockPanel.Dock="Left" Margin="10, 0">
-                <DockPanel.LayoutTransform>
-                    <RotateTransform Angle="90" />
-                </DockPanel.LayoutTransform>
+    <DockPanel ClipToBounds="False">
+        <DockPanel DockPanel.Dock="Left" Margin="10, 0">
+            <DockPanel.LayoutTransform>
+                <RotateTransform Angle="90" />
+            </DockPanel.LayoutTransform>
 
-                <TextBlock DockPanel.Dock="Left">
-                    <TextBlock.Text>
-                        <MultiBinding StringFormat="Top {0} terms out of {1}">
-                            <Binding ElementName="TopTermSlider" Path="Value" />
-                            <Binding Path="TermCount" />
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
+            <TextBlock DockPanel.Dock="Left">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="Top {0} terms out of {1}">
+                        <Binding ElementName="TopTermSlider" Path="Value" />
+                        <Binding Path="TermCount" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
 
-                <Button DockPanel.Dock="Right" Click="Button_Click">Apply</Button>
+            <Button DockPanel.Dock="Right" Click="Button_Click">Apply</Button>
 
-                <Slider 
-                    x:Name="TopTermSlider"
-                    IsSnapToTickEnabled="True"
-                    TickPlacement="BottomRight"
-                    TickFrequency="20"
-                    DockPanel.Dock="Left"
-                    Margin="0,0,5,0"
-                    Minimum="10"
-                    Maximum="{Binding Path=TermCount, Mode=OneWay}"
-                    Value="{Binding Path=NumberOfTopTerms, UpdateSourceTrigger=Explicit}">
-                </Slider>
-            </DockPanel>
+            <Slider 
+                x:Name="TopTermSlider"
+                IsSnapToTickEnabled="True"
+                TickPlacement="BottomRight"
+                TickFrequency="20"
+                DockPanel.Dock="Left"
+                Margin="0,0,5,0"
+                Minimum="10"
+                Maximum="{Binding Path=TermCount, Mode=OneWay}"
+                Value="{Binding Path=NumberOfTopTerms, UpdateSourceTrigger=Explicit}">
+            </Slider>
+        </DockPanel>
+
+        <Controls:ProgressContainer 
+            DockPanel.Dock="Bottom"
+            BusyFrameOpacity="1.0"
+            IsBusy="{Binding IsLoading}" 
+            ProgressText="Loading terms from index. Please wait ...">
 
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
                 <Button 
-                    Content="Search" 
-                    IsEnabled="{Binding ElementName=termsView, Path=SelectedItem, Converter={StaticResource notNullConverter}}" />
+                Content="Search" 
+                IsEnabled="{Binding ElementName=termsView, Path=SelectedItem, Converter={StaticResource notNullConverter}}" />
                 <Button 
-                    x:Name="InspectDocumentsButton"
-                    Content="Inspect Documents" 
-                    Command="{Binding InspectDocuments}" />
+                x:Name="InspectDocumentsButton"
+                Content="Inspect Documents" 
+                Command="{Binding InspectDocuments}" />
             </StackPanel>
-
-            <Grid>
-                <DataGrid
-                    AutoGenerateColumns="False"
-                    IsReadOnly="True"
-                    ItemsSource="{Binding Terms}" 
-                    x:Name="termsView" 
-                    LoadingRow="TermsViewLoadingRow" 
-                    MouseDoubleClick="termsView_MouseDoubleClick">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Rank}" Header="Rank" />
-                        <DataGridTextColumn Binding="{Binding Frequency}" Header="Frequency" />
-                        <DataGridTextColumn Binding="{Binding Field}" Header="Field" />
-                        <DataGridTextColumn Binding="{Binding Term}" Header="Text" Width="*" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-        </DockPanel>
-    </Controls:ProgressContainer>
+        </Controls:ProgressContainer>
+        <Grid>
+            <DataGrid
+                AutoGenerateColumns="False"
+                IsReadOnly="True"
+                ItemsSource="{Binding Terms}" 
+                x:Name="termsView" 
+                LoadingRow="TermsViewLoadingRow" 
+                MouseDoubleClick="termsView_MouseDoubleClick">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Rank}" Header="Rank" />
+                    <DataGridTextColumn Binding="{Binding Frequency}" Header="Frequency" />
+                    <DataGridTextColumn Binding="{Binding Field}" Header="Field" />
+                    <DataGridTextColumn Binding="{Binding Term}" Header="Text" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </DockPanel>
 </UserControl>
