@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="Luke.Net.Features.Overview.FieldsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Controls="clr-namespace:Luke.Net.Infrastructure.Controls" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <DockPanel>
+            <Menu 
+                x:Name="FieldMenu" 
+                IsEnabled="False"
+                DockPanel.Dock="Top">
+                <MenuItem Header="Field">
+                    <MenuItem Header="Inspect" Command="{Binding InspectFields}" />
+                </MenuItem>
+            </Menu>
+
+            <Controls:ProgressContainer 
+                DockPanel.Dock="Bottom"
+                ProgressText="{Binding ProgressText}"
+                IsBusy="{Binding IsLoading}" />
+
+            <DataGrid 
+                IsReadOnly="True"
+                ItemsSource="{Binding Fields}" 
+                Name="fieldsView"
+                SelectionChanged="fieldsView_SelectionChanged"
+                AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Field" Binding="{Binding Field}" />
+                    <DataGridTextColumn Header="Term Count" Binding="{Binding Count}" />
+                    <DataGridTextColumn Header="%" Binding="{Binding Frequency, StringFormat={}{0:F2}%}" />
+                    <DataGridTextColumn Header="Decoder" Binding="{Binding Decoder}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Grid>
+</UserControl>

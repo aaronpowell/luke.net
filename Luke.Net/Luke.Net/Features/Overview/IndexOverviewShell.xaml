@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="Luke.Net.Features.Overview.IndexOverviewShell"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    mc:Ignorable="d" 
+    xmlns:prism="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism" xmlns:Net="clr-namespace:Luke.Net" d:DesignHeight="300" d:DesignWidth="662">
+
+    <DockPanel>
+        <Expander DockPanel.Dock="Top" Header="Index Information" IsExpanded="False" Style="{StaticResource StandardBorder}">
+            <ContentControl 
+                DockPanel.Dock="Top" 
+                Name="indexInfo" 
+                prism:RegionManager.RegionName="{x:Static Net:Regions.IndexInfo}" />
+        </Expander>
+
+        <Border Style="{StaticResource StandardBorder}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1.5*" />
+                </Grid.ColumnDefinitions>
+
+                <ContentControl 
+                    x:Name="FieldsRegion" 
+                    Grid.Column="0" 
+                    Margin="5,0" 
+                    prism:RegionManager.RegionName="{x:Static Net:Regions.OverviewFields}" />
+                        
+                <GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" HorizontalAlignment="Center" ResizeBehavior="PreviousAndNext" />
+
+                <ContentControl 
+                    x:Name="TermsRegion" 
+                    Grid.Column="2" 
+                    Margin="5,0" 
+                    prism:RegionManager.RegionName="{x:Static Net:Regions.OverviewTerms}" />
+            </Grid>
+        </Border>
+    </DockPanel>
+</UserControl>

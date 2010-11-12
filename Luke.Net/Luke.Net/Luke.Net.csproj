@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{677C6DCE-0208-41CE-BF3E-425249C21A18}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Luke.Net</RootNamespace>
+    <AssemblyName>Luke.Net</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ExpressionBlendVersion>4.0.20525.0</ExpressionBlendVersion>
+    <Utf8Output>true</Utf8Output>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lucene.Net">
+      <HintPath>..\Solution Items\Reference Assemblies\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism">
+      <HintPath>..\Solution Items\Reference Assemblies\Prism\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.UnityExtensions">
+      <HintPath>..\Solution Items\Reference Assemblies\Prism\Microsoft.Practices.Prism.UnityExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\Solution Items\Reference Assemblies\Prism\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\Solution Items\Reference Assemblies\Prism\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Features\Documents\BrowseByDocumentNoView.xaml.cs">
+      <DependentUpon>BrowseByDocumentNoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Documents\BrowseByDocumentNoViewModel.cs" />
+    <Compile Include="Features\Documents\BrowseByTermView.xaml.cs">
+      <DependentUpon>BrowseByTermView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Documents\BrowseByTermViewModel.cs" />
+    <Compile Include="Features\Documents\BrowseToDocumentEvent.cs" />
+    <Compile Include="Features\Documents\DocumentInfoView.xaml.cs">
+      <DependentUpon>DocumentInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Documents\DocumentInfoViewModel.cs" />
+    <Compile Include="Features\Documents\DocumentShell.xaml.cs">
+      <DependentUpon>DocumentShell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Documents\DocumentsModule.cs" />
+    <Compile Include="Features\Documents\FieldByDocumentInfo.cs" />
+    <Compile Include="Features\Documents\Services\DocumentService.cs" />
+    <Compile Include="Features\Documents\Services\IDocumentService.cs" />
+    <Compile Include="Features\LuceneShell.xaml.cs">
+      <DependentUpon>LuceneShell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\OpenIndex\OpenIndexModule.cs" />
+    <Compile Include="Features\Overview\FieldsView.xaml.cs">
+      <DependentUpon>FieldsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Overview\FieldsViewModel.cs" />
+    <Compile Include="Features\IndexController.cs" />
+    <Compile Include="Features\Overview\IndexInfoView.xaml.cs">
+      <DependentUpon>IndexInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\LukeModule.cs" />
+    <Compile Include="Features\Overview\IndexInfoViewModel.cs" />
+    <Compile Include="Features\Overview\TermsLoadedEvent.cs" />
+    <Compile Include="Infrastructure\Controls\ProgressContainer.cs" />
+    <Compile Include="Models\Events\InspectDocumentsForTermEvent.cs" />
+    <Compile Include="Features\Overview\Services\IIndexOverviewService.cs" />
+    <Compile Include="Features\Overview\Services\IndexOverviewService.cs" />
+    <Compile Include="Features\Overview\OverviewModule.cs" />
+    <Compile Include="Features\Documents\DocumentInfo.cs" />
+    <Compile Include="Features\Overview\SelectedFieldChangedEvent.cs" />
+    <Compile Include="Features\Overview\TermsView.xaml.cs">
+      <DependentUpon>TermsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\OpenIndex\OpenIndexModel.cs" />
+    <Compile Include="Infrastructure\ValueConverters\AdditionValueConverter.cs" />
+    <Compile Include="Models\Events\IndexChangedEvent.cs" />
+    <Compile Include="Features\Overview\TermsViewModel.cs" />
+    <Compile Include="Infrastructure\RelayCommand.cs" />
+    <Compile Include="Features\Overview\IndexOverviewShell.xaml.cs">
+      <DependentUpon>IndexOverviewShell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\OpenIndex\OpenIndexView.xaml.cs">
+      <DependentUpon>OpenIndexView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TermToInspect.cs" />
+    <Compile Include="Features\Overview\FieldInfo.cs" />
+    <Compile Include="Features\Overview\IndexInfo.cs" />
+    <Compile Include="Features\Overview\TermInfo.cs" />
+    <Compile Include="Regions.cs" />
+    <Page Include="Features\Documents\BrowseByDocumentNoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Features\Documents\BrowseByTermView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Features\Documents\DocumentInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Features\Documents\DocumentShell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Features\LuceneShell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Features\Overview\FieldsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Features\Overview\IndexInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Features\Overview\TermsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Infrastructure\Utilities\IndexGate.cs" />
+    <Compile Include="Infrastructure\ValueConverters\BooleanToWordValueConverter.cs" />
+    <Compile Include="Infrastructure\ValueConverters\FieldRowToFieldConverter.cs" />
+    <Compile Include="Infrastructure\ValueConverters\IsNotEmptyValueConverter.cs" />
+    <Compile Include="Infrastructure\ValueConverters\NegateValueConverter.cs" />
+    <Compile Include="Infrastructure\ValueConverters\NotNullValueConverter.cs" />
+    <Compile Include="Infrastructure\ValueConverters\PercentageValueConverter.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Features\Overview\IndexOverviewShell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Features\OpenIndex\OpenIndexView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ExpressionDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

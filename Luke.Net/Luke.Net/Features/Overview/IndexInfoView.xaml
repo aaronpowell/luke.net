@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="Luke.Net.Features.Overview.IndexInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel Margin="5" TextElement.Foreground="White"> <!-- ToDo: Setting foreground here is a dirty hack; i do not know where it is set to black-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Index Path:" />
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding IndexInfo.IndexPath}" Style="{StaticResource Emphasise}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Number of Fields:" />
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding IndexInfo.FieldCount}" Style="{StaticResource Emphasise}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Number of Documents:" />
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding IndexInfo.DocumentCount}" Style="{StaticResource Emphasise}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="Number of Terms:" />
+            <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding IndexInfo.TermCount}" Style="{StaticResource Emphasise}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="4" Text="Has Deletions? / Is Optimized?" />
+            <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
+                <TextBlock Text="{Binding IndexInfo.HasDeletions, Converter={StaticResource BoolToWord}}" Style="{StaticResource Emphasise}" Margin="0,0,5,0" />
+                <TextBlock Text="{Binding IndexInfo.DeletionCount, StringFormat={}(0)}" Visibility="{Binding IndexInfo.HasDeletions, Converter={StaticResource BoolToVisibility}}" Style="{StaticResource Emphasise}" Margin="0,0,5,0" />
+                <TextBlock Text="/" Style="{StaticResource Emphasise}" Margin="0,0,5,0" />
+                <TextBlock Text="{Binding IndexInfo.Optimized, Converter={StaticResource BoolToWord}}" Style="{StaticResource Emphasise}" />
+            </StackPanel>
+
+            <TextBlock Grid.Column="0" Grid.Row="5" Text="Last Modified:" />
+            <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding IndexInfo.LastModified}" Style="{StaticResource Emphasise}" />
+
+        </Grid>
+        
+        <Separator Margin="0, 5" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Index Version:" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding IndexInfo.Version}" Style="{StaticResource SmallFont}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Index Format:" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding IndexInfo.IndexDetails.GenericName}" Style="{StaticResource SmallFont}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Index Features:" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding IndexInfo.IndexDetails.Capabilities}" Style="{StaticResource SmallFont}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="TermInfos index divisor:" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="3" Text="TermInfosDivisor" Style="{StaticResource SmallFont}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="4" Text="Directory Type:" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="4" Text="Directory" Style="{StaticResource SmallFont}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="5" Text="Currently open commit points:" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="5" Text="CommitPoint" Style="{StaticResource SmallFont}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="6" Text="Current commit user data:" Style="{StaticResource SmallFont}" />
+            <TextBlock Grid.Column="1" Grid.Row="6" Text="CommitData" Style="{StaticResource SmallFont}" />
+        </Grid>
+    </StackPanel>
+</UserControl>
