@@ -7,7 +7,7 @@ namespace Luke.Net.Tests.UiTests.Windows
     class UiMainWindow : WpfWindow
     {
         private UiOpenIndex _openIndex;
-        private UiFieldsView _uiFieldsView;
+        private UiOverviewTab _overviewTab;
 
         public UiMainWindow(UITestControl parent) : base(parent)
         {
@@ -21,11 +21,11 @@ namespace Luke.Net.Tests.UiTests.Windows
             }
         }
 
-        public UiFieldsView FieldsView 
-        { 
+        public UiOverviewTab OverviewTab
+        {
             get
             {
-                return _uiFieldsView ?? (_uiFieldsView = new UiFieldsView(this));
+                return _overviewTab ?? (_overviewTab = new UiOverviewTab(this));
             }
         }
     }
