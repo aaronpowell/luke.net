@@ -80,6 +80,7 @@
     <Compile Include="UiTests\Controls\UiFieldsView.cs" />
     <Compile Include="UiTests\Windows\UiMainWindow.cs" />
     <Compile Include="UiTests\Controls\UiOpenIndex.cs" />
+    <Compile Include="UiTests\Controls\UiOverviewTab.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Luke.Net\Luke.Net.csproj">
@@ -87,7 +88,6 @@
       <Name>Luke.Net</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

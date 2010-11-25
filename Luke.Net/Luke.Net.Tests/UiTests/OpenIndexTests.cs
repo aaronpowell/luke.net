@@ -42,7 +42,7 @@ namespace Luke.Net.Tests.UiTests
             Mouse.Click(openIndex.OpenIndexButton);
 
             // Assert
-            // check views are added and that a few of the index info are available!
+            //Assert.AreEqual(mainWindow.OverviewTab.FieldsGrid.RowCount, 8);
         }
 
     }

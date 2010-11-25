@@ -8,14 +8,14 @@ namespace Luke.Net.Tests.UiTests.Controls
     {
         public UiOpenIndex(UITestControl parent) : base(parent)
         {
-            this.Where().Name.Equals("loadIndexExpander");
+            this.Where().Name.Is("loadIndexExpander");
         }
 
         public WpfButton OpenIndexButton
         {
              get
              {
-                 return this.FindChild<WpfButton>();
+                 return this.GetChild<WpfButton>().Where().Text.Is("Open Index");
              }
         }
     }
