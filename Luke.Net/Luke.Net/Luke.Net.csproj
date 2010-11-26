@@ -55,6 +55,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Reactive, Version=1.0.2787.104, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive.Contrib">
+      <HintPath>..\..\..\..\..\Software\System.Reactive.Contrib.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -109,6 +113,7 @@
     <Compile Include="Features\Overview\IndexInfoViewModel.cs" />
     <Compile Include="Features\Overview\TermsLoadedEvent.cs" />
     <Compile Include="Infrastructure\Controls\ProgressContainer.cs" />
+    <Compile Include="Infrastructure\IServiceFactory.cs" />
     <Compile Include="Models\Events\InspectDocumentsForTermEvent.cs" />
     <Compile Include="Features\Overview\Services\IIndexOverviewService.cs" />
     <Compile Include="Features\Overview\Services\IndexOverviewService.cs" />

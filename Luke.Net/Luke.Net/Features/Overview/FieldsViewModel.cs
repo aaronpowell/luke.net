@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
-using Luke.Net.Features.Overview.Services;
+using Luke.Net.Features.OpenIndex;
 using Luke.Net.Infrastructure;
+using Luke.Net.Models.Events;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 using System.Linq;
@@ -13,17 +16,29 @@ namespace Luke.Net.Features.Overview
 {
     public class FieldsViewModel : NotificationObject
     {
-        private readonly IIndexOverviewService _indexOverviewService;
         private readonly List<FieldInfo> _fields = new List<FieldInfo>();
 
-        public FieldsViewModel(IEventAggregator eventAggregator, IIndexOverviewService indexOverviewService)
+        public FieldsViewModel(IEventAggregator eventAggregator)
         {
-            _indexOverviewService = indexOverviewService;
             eventAggregator.GetEvent<TermsLoadedEvent>().Subscribe(TermsLoaded);
+            eventAggregator.GetEvent<FieldsLoadedEvent>().Subscribe(FieldsLoaded);
+            eventAggregator.GetEvent<FieldsLoadingEvent>().Subscribe(FieldsLoading);
             InspectFields = new RelayCommand<IEnumerable<FieldInfo>>(InspectFieldsExecuted);
             Fields = new ListCollectionView(_fields);
+        }
 
-            LoadModel();
+        private void FieldsLoading(IndexInfo indexInfo)
+        {
+            _fields.Clear();
+            IsLoading = true;
+            ProgressText = string.Format("Loading {0} fields from index. Please wait ...", indexInfo.FieldCount);
+        }
+
+        private void FieldsLoaded(IEnumerable<FieldInfo> fields)
+        {
+            ProgressText = "Fields Loaded. Please wait ...";
+            _fields.AddRange(fields);
+            Fields.Refresh();
         }
 
         private void TermsLoaded(IEnumerable<TermInfo> terms)
@@ -41,26 +56,6 @@ namespace Luke.Net.Features.Overview
 
             Fields.Refresh();
             IsLoading = false;
-        }
-
-        private void LoadModel()
-        {
-            _fields.Clear();
-
-            IsLoading = true;
-            ProgressText = "Loading fields from index. Please wait ...";
-            var ui = TaskScheduler.FromCurrentSynchronizationContext();
-
-            Task.Factory
-                .StartNew(() => _indexOverviewService.GetFields().ToList())
-                .ContinueWith(
-                    t =>
-                        {
-                            _fields.AddRange(t.Result);
-                            Fields.Refresh();
-                            ProgressText = "Waiting for terms to load. Please wait ...";
-                        },
-                    ui);
         }
 
         public ICommand InspectFields { get; set; }
@@ -92,5 +87,9 @@ namespace Luke.Net.Features.Overview
                 RaisePropertyChanged(()=>ProgressText);
             }
         }
+    }
+
+    public class FieldsLoadingEvent : CompositePresentationEvent<IndexInfo>
+    {
     }
 }

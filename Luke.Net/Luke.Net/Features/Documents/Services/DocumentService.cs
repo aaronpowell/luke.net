@@ -15,9 +15,9 @@ namespace Luke.Net.Features.Documents.Services
     {
         private readonly OpenIndexModel _openIndexModel;
 
-        public DocumentService()
+        public DocumentService(OpenIndexModel openIndexModel)
         {
-            _openIndexModel = App.OpenIndexModel;
+            _openIndexModel = openIndexModel;
         }
 
         public IEnumerable<DocumentInfo> GetDocumentsInfo()

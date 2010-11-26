@@ -10,10 +10,9 @@ namespace Luke.Net.Features.Overview.Services
     {
         private readonly OpenIndexModel _openIndexModel;
 
-        public IndexOverviewService()
+        public IndexOverviewService(OpenIndexModel openIndexModel)
         {
-            // ToDo: i should change this soon
-            _openIndexModel = App.OpenIndexModel;
+            _openIndexModel = openIndexModel;
         }
 
         public IEnumerable<FieldInfo> GetFields()
@@ -25,7 +24,10 @@ namespace Luke.Net.Features.Overview.Services
             {
                 indexReader = IndexReader.Open(directory, true); // ToDo should i open this only once
                 foreach (var fieldName in indexReader.GetFieldNames(IndexReader.FieldOption.ALL))
-                    yield return new FieldInfo {Field = fieldName };
+                {
+                    System.Threading.Thread.Sleep(400);
+                    yield return new FieldInfo { Field = fieldName };
+                }
             }
             finally
             {
@@ -57,7 +59,7 @@ namespace Luke.Net.Features.Overview.Services
                                DeletionCount = indexReader.NumDeletedDocs(),
                                Optimized = indexReader.IsOptimized(),
                                IndexPath = Path.GetFullPath(_openIndexModel.Path),
-                               TermCount = 0 // GetFieldsAndTerms().SelectMany(f =>f.Terms).Count()
+                               TermCount = 0 
                            };
             }
             finally
@@ -80,6 +82,7 @@ namespace Luke.Net.Features.Overview.Services
 
                 while (terms.Next())
                 {
+                    System.Threading.Thread.Sleep(2);
                     var term = terms.Term();
                     yield return new TermInfo { Term = term.Text(), Field = term.Field(), Frequency = terms.DocFreq() };
                 }

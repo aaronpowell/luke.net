@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
-using Luke.Net.Features.Overview.Services;
+using Luke.Net.Features.OpenIndex;
+using Luke.Net.Infrastructure;
+using Luke.Net.Models.Events;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.ViewModel;
 using System.Linq;
@@ -8,14 +10,19 @@ namespace Luke.Net.Features.Overview
 {
     public class IndexInfoViewModel : NotificationObject
     {
-        private readonly IIndexOverviewService _indexOverviewService;
+        private readonly IServiceFactory _serviceFactory;
 
-        public IndexInfoViewModel(IEventAggregator eventAggregator, IIndexOverviewService indexOverviewService)
+        public IndexInfoViewModel(IEventAggregator eventAggregator, IServiceFactory serviceFactory)
         {
-            _indexOverviewService = indexOverviewService;
+            _serviceFactory = serviceFactory;
+            
             eventAggregator.GetEvent<TermsLoadedEvent>().Subscribe(TermsLoaded);
+            eventAggregator.GetEvent<IndexInfoLoadedEvent>().Subscribe(IndexInfoLoaded);
+        }
 
-            IndexInfo = _indexOverviewService.GetIndexInfo();
+        private void IndexInfoLoaded(IndexInfo indexInfo)
+        {
+            IndexInfo = indexInfo;
         }
 
         private void TermsLoaded(IEnumerable<TermInfo> terms)
@@ -34,5 +41,9 @@ namespace Luke.Net.Features.Overview
                 RaisePropertyChanged(()=>IndexInfo);
             }
         }
+    }
+
+    public class IndexInfoLoadedEvent : CompositePresentationEvent<IndexInfo>
+    {
     }
 }

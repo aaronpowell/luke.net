@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Data;
 using System.Windows.Input;
 using Luke.Net.Features.Documents.Services;
+using Luke.Net.Features.OpenIndex;
 using Luke.Net.Infrastructure;
 using Luke.Net.Models;
 using Luke.Net.Models.Events;
@@ -16,21 +17,31 @@ namespace Luke.Net.Features.Documents
     public class BrowseByTermViewModel:NotificationObject
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IDocumentService _documentService;
+        private readonly IServiceFactory _serviceFactory;
         private readonly ObservableCollection<string> _fields;
         private IEnumerable<DocumentInfo> _foundDocuments;
 
-        public BrowseByTermViewModel(IEventAggregator eventAggregator, IDocumentService documentService)
+        public BrowseByTermViewModel(IEventAggregator eventAggregator, IServiceFactory serviceFactory)
         {
             _eventAggregator = eventAggregator;
-            _documentService = documentService;
+            _serviceFactory = serviceFactory;
 
             _eventAggregator.GetEvent<InspectDocumentsForTermEvent>().Subscribe(InspectDocuments);
+            _eventAggregator.GetEvent<IndexChangedEvent>().Subscribe(IndexLoaded);
 
             InspectDocumentCommand = new RelayCommand(InspectDocument, CanInspectDocument);
-            _fields = new ObservableCollection<string>(_documentService.GetFields());
+            _fields = new ObservableCollection<string>();
             Fields = new CollectionView(_fields);
             RaisePropertyChanged(() => Fields);
+        }
+
+        private void IndexLoaded(OpenIndexModel index)
+        {
+            _documentService = _serviceFactory.CreateDocumentService(index);
+            foreach (var result in _documentService.GetFields())
+            {
+                _fields.Add(result);
+            }
         }
 
         private void InspectDocument()
@@ -87,6 +98,8 @@ namespace Luke.Net.Features.Documents
         }
 
         private int _indexOfDocumentToBrowse;
+        private IDocumentService _documentService;
+
         public int IndexOfDocumentToBrowse
         {
             get { return _indexOfDocumentToBrowse; }
