@@ -14,8 +14,8 @@ namespace Luke.Net.Features.Documents
         {
             _eventAggregator = eventAggregator;
             _documentService = documentService;
-            Count = _documentService.GetNumberOfDocuments();
             BrowseDocument = new RelayCommand<int>(ExecuteBrowseDocument);
+            //Count = _documentService.GetNumberOfDocuments();
         }
 
         private void ExecuteBrowseDocument(int documentNo)

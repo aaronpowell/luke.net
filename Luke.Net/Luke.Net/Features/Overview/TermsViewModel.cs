@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
+using Luke.Net.Features.OpenIndex;
 using Luke.Net.Features.Overview.Services;
 using Luke.Net.Infrastructure;
 using Luke.Net.Models;
@@ -19,16 +20,18 @@ namespace Luke.Net.Features.Overview
     public class TermsViewModel : NotificationObject
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IIndexOverviewService _indexOverviewService;
-        private List<TermInfo> _terms;
+        private readonly IServiceFactory _serviceFactory;
+        private readonly List<TermInfo> _terms;
         private readonly ObservableCollection<TermInfo> _termsCollection;
         private IEnumerable<FieldInfo> _fieldsFilter;
 
-        public TermsViewModel(IEventAggregator eventAggregator, IIndexOverviewService indexOverviewService)
+        public TermsViewModel(IEventAggregator eventAggregator, IServiceFactory serviceFactory)
         {
             _eventAggregator = eventAggregator;
-            _indexOverviewService = indexOverviewService;
+            _serviceFactory = serviceFactory;
             _eventAggregator.GetEvent<SelectedFieldChangedEvent>().Subscribe(FilterTermsExecuted);
+            _eventAggregator.GetEvent<TermsLoadingEvent>().Subscribe(TermsLoading);
+            _eventAggregator.GetEvent<TermsLoadedEvent>().Subscribe(TermsLoaded);
 
             _terms = new List<TermInfo>();
             FilterTerms = new RelayCommand<IEnumerable<FieldInfo>>(FilterTermsExecuted);
@@ -36,8 +39,20 @@ namespace Luke.Net.Features.Overview
             Terms = new ListCollectionView(_termsCollection);
 
             InspectDocuments = new RelayCommand(ExecuteInspectDocuments, CanInspectDocuments);
+        }
 
-            LoadModel();
+        private void TermsLoading(IndexInfo index)
+        {
+            IsLoading = true;
+            _terms.Clear();
+        }
+
+        private void TermsLoaded(IEnumerable<TermInfo> terms)
+        {
+            _terms.AddRange(terms);
+            UpdateTermsView();
+            RaisePropertyChanged(() => TermCount);
+            IsLoading = false;
         }
 
         private void ExecuteInspectDocuments()
@@ -50,36 +65,6 @@ namespace Luke.Net.Features.Overview
         private bool CanInspectDocuments()
         {
             return Terms.CurrentItem != null;
-        }
-
-        private void LoadModel()
-        {
-            IsLoading = true;
-
-            var ui = TaskScheduler.FromCurrentSynchronizationContext();
-            var pipeline = new BlockingCollection<TermInfo>();
-
-            Task.Factory.StartNew(
-                () =>
-                    {
-                        foreach (var term in _indexOverviewService.GetTerms())
-                            pipeline.Add(term);
-
-                        pipeline.CompleteAdding();
-                    })
-                .ContinueWith(
-                    t =>
-                        {
-                            _terms.AddRange(pipeline.GetConsumingEnumerable());
-                            UpdateTermsView();
-                            RaisePropertyChanged(() => TermCount);
-                            IsLoading = false;
-                            // let others know that terms have been loaded
-                            _eventAggregator.GetEvent<TermsLoadedEvent>().Publish(_terms);
-                        },
-                    CancellationToken.None,
-                    TaskContinuationOptions.OnlyOnRanToCompletion,
-                    ui);
         }
 
         private bool _isLoading;
